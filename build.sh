@@ -30,15 +30,15 @@ should_apply_patches=false
 should_sign_package=false
 should_clean_build=false
 
-read -p "Clean previous build artifacts (out/ directory)? (y/N). Press enter for No (the default option): " -r reply
+read -p "Clean previous build artifacts (out/ directory)? (y/N). Press enter for NO: " -r reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
   should_clean_build=true
 fi
-read -p "Apply patches? (y/N). Press enter for No (the default option): " -r reply
+read -p "Apply patches? (y/N). Press enter for NO: " -r reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
   should_apply_patches=true
 fi
-read -p "Sign and package the application after build? (y/N). Press enter for No (the default option): " -r reply
+read -p "Sign and package the application after build? (y/N). Press enter for NO: " -r reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
   should_sign_package=true
 fi
