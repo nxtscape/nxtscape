@@ -11,14 +11,6 @@ _root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script 
 _src_dir="$_root_dir/build/src/"  # Chromium source code directory
 _out_dir="Release"
 
-# Whether to clean the build directory and regenerate ninja files
-should_clean_build=false
-# Whether to apply patches
-should_apply_patches=false
-# Whether to sign and package the application
-should_sign_package=false
-
-
 # Parse command line options
 clone=true  # Default is to clone the source repository
 while getopts 'd' OPTION; do
@@ -33,6 +25,23 @@ shift "$(($OPTIND - 1))"  # Shift positional parameters to access non-option arg
 
 _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 
+# Variables for build steps - will be prompted
+should_apply_patches=false
+should_sign_package=false
+should_clean_build=false
+
+read -p "Clean previous build artifacts (out/ directory)? (y/N): " -r reply
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+  should_clean_build=true
+fi
+read -p "Apply patches? (y/N): " -r reply
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+  should_apply_patches=true
+fi
+read -p "Sign and package the application after build? (y/N): " -r reply
+if [[ "$reply" =~ ^[Yy]$ ]]; then
+  should_sign_package=true
+fi
 
 # Clean up previous build artifacts
 if [ "$should_clean_build" = true ]; then
