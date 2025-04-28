@@ -1,6 +1,6 @@
 nxtscape/new-branding.patch
-# nxtscape/ai-sidepanel-extension.patch
-# nxtscape/ai-agent-side-panel.patch
+nxtscape/ai-sidepanel-extension.patch
+nxtscape/ai-agent-side-panel.patch
 # nxtscape/disable-user-gesture-restriction-on-sidepanel.patch
 # nxtscape/first-run-nxtscape.patch
 # nxtscape/first-run-nxtscape-2.patch

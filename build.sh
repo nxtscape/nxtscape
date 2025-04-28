@@ -8,8 +8,7 @@ set -eux
 
 # Some path variables
 _root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script directory
-_download_cache="$_root_dir/build/download_cache"  # Directory to cache downloaded files
-_src_dir="$_root_dir/src/"  # Chromium source code directory
+_src_dir="$_root_dir/build/src/"  # Chromium source code directory
 _out_dir="Release"
 
 
@@ -30,16 +29,16 @@ _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 
 # Clean up previous build artifacts
 # rm -rf "$_src_dir/out" || true  # Remove previous output directory
-mkdir -p "$_download_cache"  # Create download cache directory if it doesn't exist
 
 # Create output directory
 mkdir -p "$_src_dir/out/$_out_dir"
 
 # Apply patches
-python3 "$_root_dir/scripts/patches.py" apply "$_src_dir" "$_root_dir/patches"  
+# python3 "$_root_dir/scripts/patches.py" apply "$_src_dir" "$_root_dir/patches"  
 
 # Set build flags by combining flag files
 cat "$_root_dir/scripts/flags.macos.gn" >"$_src_dir/out/$_out_dir/args.gn"
+
 
 # Set target_cpu to the corresponding architecture
 if [[ $_arch == "arm64" ]]; then
@@ -72,11 +71,10 @@ cp -r $_root_dir/files/ai_side_panel/* "$_ai_side_panel_dir"
 cd "$_src_dir"
 
 # Generate ninja build files
-./out/Default/gn gen out/Default --fail-on-unused-args
-
+# gn gen out/$_out_dir --fail-on-unused-args
 
 # autoninja is a wrapper around ninja that automatically sets optimal parameters
-autoninja -C out/Default chrome chromedriver
+autoninja -C out/$_out_dir chrome chromedriver
 
 # Sign and package the application
 # "$_root_dir/sign_and_package_app.sh"

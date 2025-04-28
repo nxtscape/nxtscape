@@ -19,20 +19,21 @@ is_official_build=false
 # enable_service_discovery=false
 # enable_widevine=true
 # exclude_unwind_tables=true
+# treat_warnings_as_errors=false
+
 # google_api_key=""
 # google_default_client_id=""
 # google_default_client_secret=""
 # safe_browsing_mode=0
-# treat_warnings_as_errors=false
 # use_official_google_api_keys=false
 # use_unofficial_version_number=false
-
+# enable_updater=false
 # blink_symbol_level=0
+
 # enable_iterator_debugging=false
 # enable_mse_mpeg2ts_stream_parser=true
 # enable_rust=true
 # enable_swiftshader=true
-# enable_updater=false
 # fatal_linker_warnings=false
 # ffmpeg_branding="Chrome"
 
