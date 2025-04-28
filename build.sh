@@ -11,6 +11,13 @@ _root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script 
 _src_dir="$_root_dir/build/src/"  # Chromium source code directory
 _out_dir="Release"
 
+# Whether to clean the build directory and regenerate ninja files
+should_clean_build=false
+# Whether to apply patches
+should_apply_patches=false
+# Whether to sign and package the application
+should_sign_package=false
+
 
 # Parse command line options
 clone=true  # Default is to clone the source repository
@@ -28,13 +35,19 @@ _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 
 
 # Clean up previous build artifacts
-# rm -rf "$_src_dir/out" || true  # Remove previous output directory
+if [ "$should_clean_build" = true ]; then
+  echo "Cleaning up previous build artifacts..."
+  rm -rf "$_src_dir/out" || true  # Remove previous output directory
+fi
 
 # Create output directory
 mkdir -p "$_src_dir/out/$_out_dir"
 
 # Apply patches
-# python3 "$_root_dir/scripts/patches.py" apply "$_src_dir" "$_root_dir/patches"  
+if [ "$should_apply_patches" = true ]; then
+  echo "Applying patches..."
+  python3 "$_root_dir/scripts/patches.py" apply "$_src_dir" "$_root_dir/patches"
+fi
 
 # Set build flags by combining flag files
 cat "$_root_dir/scripts/flags.macos.gn" >"$_src_dir/out/$_out_dir/args.gn"
@@ -71,10 +84,16 @@ cp -r $_root_dir/files/ai_side_panel/* "$_ai_side_panel_dir"
 cd "$_src_dir"
 
 # Generate ninja build files
-# gn gen out/$_out_dir --fail-on-unused-args
+if [ "$should_clean_build" = true ]; then
+  echo "Generating ninja build files..."
+  gn gen out/$_out_dir --fail-on-unused-args
+fi
 
 # autoninja is a wrapper around ninja that automatically sets optimal parameters
 autoninja -C out/$_out_dir chrome chromedriver
 
 # Sign and package the application
-# "$_root_dir/sign_and_package_app.sh"
+if [ "$should_sign_package" = true ]; then
+  echo "Signing and packaging the application..."
+  "$_root_dir/sign_and_package_app.sh"
+fi
