@@ -104,5 +104,5 @@ autoninja -C out/$_out_dir chrome chromedriver
 # Sign and package the application
 if [ "$should_sign_package" = true ]; then
   echo "Signing and packaging the application..."
-  "$_root_dir/sign_and_package_app.sh"
+  $_root_dir/sign_and_package_app.sh
 fi
