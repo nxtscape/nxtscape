@@ -103,7 +103,74 @@ def dry_run_check(patch_path, tree_path, patch_bin_path=None):
     return result.returncode, result.stdout, result.stderr
 
 
-def apply_patches(patch_path_iter, tree_path, reverse=False, patch_bin_path=None):
+def git_reset_clean(tree_path):
+    """
+    Run git reset --hard HEAD and git clean -fd on the specified directory
+    including all submodules
+    
+    tree_path is the pathlib.Path of the source tree to reset
+    
+    Returns True on success, False on failure
+    """
+    logger = get_logger()
+    try:
+        logger.info("Running git reset --hard HEAD in %s", tree_path)
+        subprocess.run(
+            ["git", "reset", "--hard", "HEAD"],
+            cwd=str(tree_path),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        
+        logger.info("Running git clean -fd in %s", tree_path)
+        subprocess.run(
+            ["git", "clean", "-fd"],
+            cwd=str(tree_path),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        
+        logger.info("Resetting git submodules in %s", tree_path)
+        subprocess.run(
+            ["git", "submodule", "foreach", "--recursive", "git", "reset", "--hard"],
+            cwd=str(tree_path),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        
+        logger.info("Cleaning git submodules in %s", tree_path)
+        subprocess.run(
+            ["git", "submodule", "foreach", "--recursive", "git", "clean", "-fd"],
+            cwd=str(tree_path),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        
+        logger.info("Checking git status after reset:")
+        result = subprocess.run(
+            ["git", "status"],
+            cwd=str(tree_path),
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True,
+        )
+        status_output = result.stdout.strip()
+        logger.info(status_output)
+        
+        return True
+    except subprocess.CalledProcessError as e:
+        logger.error("Git operation failed with exit code %d", e.returncode)
+        logger.error("stdout:\n%s", e.stdout.decode() if e.stdout else "")
+        logger.error("stderr:\n%s", e.stderr.decode() if e.stderr else "")
+        return False
+
+
+def apply_patches(patch_path_iter, tree_path, reverse=False, patch_bin_path=None, continue_on_reject=False):
     """
     Applies or reverses a list of patches
 
@@ -112,6 +179,7 @@ def apply_patches(patch_path_iter, tree_path, reverse=False, patch_bin_path=None
     reverse is whether the patches should be reversed
     patch_bin_path is the pathlib.Path of the patch binary, or None to find it automatically
         See find_and_check_patch() for logic to find "patch"
+    continue_on_reject is whether to continue applying patches even if some hunks are rejected
 
     Raises ValueError if the patch binary could not be found.
     """
@@ -165,38 +233,41 @@ def apply_patches(patch_path_iter, tree_path, reverse=False, patch_bin_path=None
             if failed_files:
                 logger.error('Patch failed on file(s): %s', ', '.join(failed_files))
             
-            # Prompt user for action
-            print("\n============================================")
-            print(f"Patch {patch_path.name} failed to apply.")
-            if failed_files:
-                print(f"Problematic file(s): {', '.join(failed_files)}")
-            print("Options:")
-            print("  1) Skip this patch and continue")
-            print("  2) Retry this patch")
-            print("  3) Abort patching")
-            print("  4) Interactive mode - I'll fix it now and then resume")
-            
-            choice = ""
-            while choice not in ["1", "2", "3", "4"]:
-                choice = input("Enter your choice (1-4): ").strip()
-            
-            if choice == "1":
-                # Skip this patch
-                logger.info("Skipping patch %s", patch_path.name)
-                patch_num += 1
-            elif choice == "2":
-                # Retry (stays on same patch_num)
-                logger.info("Retrying patch %s", patch_path.name)
-            elif choice == "3":
-                # Abort
-                logger.info("Aborting patch process")
-                raise RuntimeError("Patching aborted by user")
-            elif choice == "4":
-                # Interactive mode
-                print("\nPlease fix the issue now. When you're ready to continue, press Enter.")
-                input("Press Enter to continue...")
-                # Retry after user intervention
-                logger.info("Retrying patch %s after user intervention", patch_path.name)
+            if not continue_on_reject:
+                # Prompt user for action
+                print("\n============================================")
+                print(f"Patch {patch_path.name} failed to apply.")
+                if failed_files:
+                    print(f"Problematic file(s): {', '.join(failed_files)}")
+                print("Options:")
+                print("  1) Skip this patch and continue")
+                print("  2) Retry this patch")
+                print("  3) Abort patching")
+                print("  4) Interactive mode - I'll fix it now and then resume")
+                
+                choice = ""
+                while choice not in ["1", "2", "3", "4"]:
+                    choice = input("Enter your choice (1-4): ").strip()
+                
+                if choice == "1":
+                    # Skip this patch
+                    logger.info("Skipping patch %s", patch_path.name)
+                    patch_num += 1
+                elif choice == "2":
+                    # Retry (stays on same patch_num)
+                    logger.info("Retrying patch %s", patch_path.name)
+                elif choice == "3":
+                    # Abort
+                    logger.info("Aborting patch process")
+                    raise RuntimeError("Patching aborted by user")
+                elif choice == "4":
+                    # Interactive mode
+                    print("\nPlease fix the issue now. When you're ready to continue, press Enter.")
+                    input("Press Enter to continue...")
+                    # Retry after user intervention
+                    logger.info("Retrying patch %s after user intervention", patch_path.name)
+            else:
+                logger.info("Continuing to apply patches despite failure")
 
 
 def generate_patches_from_series(patches_dir, resolve=False):
@@ -250,6 +321,11 @@ def merge_patches(source_iter, destination, prepend=False):
 
 def _apply_callback(args, parser_error):
     logger = get_logger()
+    
+    if args.reset_repo:
+        if not git_reset_clean(args.target):
+            parser_error("Failed to reset and clean git repository.")
+    
     patch_bin_path = None
     if args.patch_bin is not None:
         patch_bin_path = Path(args.patch_bin)
@@ -264,7 +340,8 @@ def _apply_callback(args, parser_error):
         logger.info('Applying patches from %s', patch_dir)
         apply_patches(generate_patches_from_series(patch_dir, resolve=True),
                       args.target,
-                      patch_bin_path=patch_bin_path)
+                      patch_bin_path=patch_bin_path,
+                      continue_on_reject=args.continue_on_reject)
 
 
 def _merge_callback(args, _):
@@ -281,6 +358,14 @@ def main():
         'apply', help='Applies patches (in GNU Quilt format) to the specified source tree')
     apply_parser.add_argument('--patch-bin',
                               help='The GNU patch command to use. Omit to find it automatically.')
+    apply_parser.add_argument(
+        '--reset-repo',
+        action='store_true',
+        help='Run git reset --hard HEAD and git clean -fd on the target directory before applying patches.')
+    apply_parser.add_argument(
+        '--continue-on-reject',
+        action='store_true',
+        help='Continue applying patches even if some hunks are rejected. A summary of rejected patches will be displayed at the end.')
     apply_parser.add_argument('target', type=Path, help='The directory tree to apply patches onto.')
     apply_parser.add_argument(
         'patches',
