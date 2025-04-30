@@ -9,7 +9,7 @@ set -eux
 # Some path variables
 _root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script directory
 _src_dir="$_root_dir/build/src/"  # Chromium source code directory
-_out_dir="Release"
+_out_dir="Default"
 
 # Parse command line options
 clone=true  # Default is to clone the source repository
@@ -46,7 +46,7 @@ fi
 # Clean up previous build artifacts
 if [ "$should_clean_build" = true ]; then
   echo "Cleaning up previous build artifacts..."
-  rm -rf "$_src_dir/out" || true  # Remove previous output directory
+  rm -rf "$_src_dir/out/$_out_dir" || true  # Remove previous output directory
 fi
 
 # Create output directory
