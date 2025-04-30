@@ -1,12 +1,12 @@
 #!/bin/bash
-# set -e  # Removed to allow script to continue on errors
+set -e  # Removed to allow script to continue on errors
 
 # Get the directory of this script
 _root_dir=$(dirname $(greadlink -f $0))
 
 # Define paths
-_out_dir="Release"
-_nxtscape_app_path="$_root_dir/src/out/$_out_idr/Nxtscape.app"
+_out_dir="Default"
+_nxtscape_app_path="$_root_dir/build/src/out/$_out_dir/Nxtscape.app"
 _notarize_zip_path="$_root_dir/notarize.zip"
 _chromium_version=$(cat "$_root_dir"/scripts/chromium_version.txt)
 _package_revision=$(cat "$_root_dir"/scripts/nxtscape_version.txt)
@@ -112,14 +112,12 @@ fi
 
 # --- Package the App ---
 echo "Packaging the notarized application into DMG..."
-# Create the target build directory if it doesn't exist
-mkdir -p "$_root_dir/build"
 
 # Remove old DMG if it exists
 rm -f "$_final_dmg_path"
 
 # Package into DMG using the correct, stapled app bundle
-if ! chrome/installer/mac/pkg-dmg \
+if ! $_root_dir/build/src/chrome/installer/mac/pkg-dmg \
   --sourcefile --source "$_nxtscape_app_path" \
   --target "$_final_dmg_path" \
   --volname "Nxtscape" \
