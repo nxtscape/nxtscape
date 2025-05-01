@@ -1,17 +1,17 @@
-is_debug=true
-is_component_build=true
+#is_debug=true
+#is_component_build=true
+#symbol_level=0
+#is_clang=true
+#chrome_pgo_phase = 0
+#is_official_build=false
+
+# For official build
+is_debug=false
+is_component_build=false
+is_official_build=true
 symbol_level=0
 is_clang=true
 chrome_pgo_phase = 0
-is_official_build=false
-
-# For official build
-# is_debug=false
-# is_component_build=false 
-# is_official_build=true
-# symbol_level=0
-# is_clang=true
-# chrome_pgo_phase = 0
 
 
 # build_with_tflite_lib=false
@@ -41,7 +41,7 @@ blink_symbol_level=0
 # enable_iterator_debugging=false
 # enable_mse_mpeg2ts_stream_parser=true
 # enable_rust=true
-# enable_swiftshader=true
+enable_swiftshader=true
 # fatal_linker_warnings=false
 ffmpeg_branding="Chrome"
 

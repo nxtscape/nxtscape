@@ -50,11 +50,11 @@ div[class*="side"], div[class*="extension"] {
 /* Side Panel Header */
 .sidepanel-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   padding: 8px;
-  border-bottom: 1px solid #e0e0e0;
-  background-color: #f5f5f5;
+  border-bottom: 1px solid #3c4043;
+  background-color: #1e1e1e;
   position: sticky;
   top: 0;
   left: 0;
@@ -66,7 +66,9 @@ div[class*="side"], div[class*="extension"] {
 
 .header-controls {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
 }
 
 .header-button {
@@ -79,18 +81,52 @@ div[class*="side"], div[class*="extension"] {
   background-color: transparent;
   border-radius: 4px;
   cursor: pointer;
-  color: #5f6368;
+  color: #e8eaed;
   padding: 0;
   margin-top: 4px;
   margin-bottom: 4px;
 }
 
 .header-button:hover {
-  background-color: rgba(32, 33, 36, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .header-button:active {
-  background-color: rgba(32, 33, 36, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.sidepanel-header .model-selector-container {
+  margin-right: auto;
+  position: relative;
+  z-index: 100;
+}
+
+.sidepanel-header .model-selector-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #e8eaed;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidepanel-header .model-selector-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidepanel-header .model-name {
+  font-weight: 400;
+}
+
+.sidepanel-header .dropdown-arrow {
+  font-size: 8px;
+  margin-left: 2px;
+  opacity: 0.7;
 }
 
 /* Chat Container */
@@ -1049,4 +1085,111 @@ div[class*="side"], div[class*="extension"] {
 
 .dark .tab-card.highlighted {
   background-color: #282828;
+}
+
+/* Model Selector Styles */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  background-color: #1e1e1e;
+  border-bottom: 1px solid #3c4043;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.model-selector-container {
+  position: relative;
+  z-index: 100;
+}
+
+.model-selector-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 6px;
+  color: #e8eaed;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.model-selector-button:hover {
+  background-color: #3c4043;
+}
+
+.model-name {
+  font-weight: 400;
+}
+
+.dropdown-arrow {
+  font-size: 8px;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+
+.model-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 180px;
+  background-color: #2d2d2d;
+  border: 1px solid #5f6368;
+  border-radius: 4px;
+  margin-top: 4px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.model-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.model-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #3c4043;
+  transition: background-color 0.2s ease;
+}
+
+.model-option:last-child {
+  border-bottom: none;
+}
+
+.model-option:hover {
+  background-color: #3c4043;
+}
+
+.model-option.selected {
+  background-color: rgba(138, 180, 248, 0.1);
+  border-left: 2px solid #8ab4f8;
+}
+
+.model-option-name {
+  color: #e8eaed;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.model-option-web {
+  color: #8ab4f8;
+  font-size: 11px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.model-option-web::before {
+  content: "🔍";
+  margin-right: 4px;
+  font-size: 9px;
 }
