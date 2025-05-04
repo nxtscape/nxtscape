@@ -56,6 +56,7 @@ should_apply_patches=true
 should_sign_package=true
 should_clean_build=true
 should_reset_git=true
+should_clean_git=false
 
 # Handle interactive vs non-interactive mode
 if [ "$non_interactive" = false ]; then
@@ -81,19 +82,28 @@ else
   echo "  - Apply patches: $should_apply_patches"
   echo "  - Sign package: $should_sign_package"
   echo "  - Reset git: $should_reset_git"
+  echo "  - Clean git: $should_clean_git"
 fi
 
 # Reset git branch if requested
 if [ "$should_reset_git" = true ]; then
   echo "Resetting git branch and removing all tracked files..."
   cd "$_src_dir"
-  # Clean with exclusions for important directories
+  git reset --hard HEAD
+  cd "$_root_dir"
+fi
+
+# Clean git with exclusions for important directories
+if [ "$should_clean_git" = true ]; then
+  cd "$_src_dir"
   echo "Running git clean with exclusions for gn and other important tools..."
   git clean -fdx \
     --exclude="third_party/" \
     --exclude="build_tools/" \
-    --exclude="uc_staging/" 
-  git reset --hard HEAD
+    --exclude="uc_staging/" \
+    --exclude="buildtools/" \
+    --exclude="tools/" \
+    --exclude="build/" 
   cd "$_root_dir"
 fi
 
