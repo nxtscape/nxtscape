@@ -1,5 +1,27 @@
 #!/usr/bin/env bash
 
+# ==========================================================================
+# NXTscape Browser Build Script
+# ==========================================================================
+# Usage: ./build.sh [options] [architecture]
+#
+# Options:
+#   -r    Build release version (default is debug build)
+#   -n    Non-interactive mode (use all defaults, no prompts)
+#
+# Architecture:
+#   arm64  Build for Apple Silicon (default)
+#   x64    Build for Intel processors
+#
+# Examples:
+#   ./build.sh              # Debug build for arm64
+#   ./build.sh -r           # Release build for arm64
+#   ./build.sh x64          # Debug build for x64
+#   ./build.sh -r x64       # Release build for x64
+#   ./build.sh -n           # Debug build with all defaults (no prompts)
+#   ./build.sh -nr          # Release build with all defaults (no prompts)
+# ==========================================================================
+
 # Exit immediately if a command fails (e), treat unset variables as errors (u),
 # and print commands before execution (x)
 set -eux
@@ -12,11 +34,15 @@ _src_dir="$_root_dir/build/src/"  # Chromium source code directory
 _out_dir="Default"
 
 # Parse command line options
-clone=true  # Default is to clone the source repository
-while getopts 'd' OPTION; do
+release=false  # Default is debug build
+non_interactive=false  # Default is interactive mode
+while getopts 'rn' OPTION; do
   case "$OPTION" in
-  d)
-    clone=false  # -d option disables cloning, uses downloads instead
+  r)
+    release=true  # -r option enables release build
+    ;;
+  n)
+    non_interactive=true  # -n option enables non-interactive mode
     ;;
   esac
 done
@@ -26,21 +52,29 @@ shift "$(($OPTIND - 1))"  # Shift positional parameters to access non-option arg
 _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 
 # Variables for build steps - will be prompted
-should_apply_patches=false
-should_sign_package=false
-should_clean_build=false
+should_apply_patches=true
+should_sign_package=true
+should_clean_build=true
 
-read -p "Clean previous build artifacts (out/ directory)? (y/N). Press enter for NO: " -r reply
-if [[ "$reply" =~ ^[Yy]$ ]]; then
-  should_clean_build=true
-fi
-read -p "Apply patches? (y/N). Press enter for NO: " -r reply
-if [[ "$reply" =~ ^[Yy]$ ]]; then
-  should_apply_patches=true
-fi
-read -p "Sign and package the application after build? (y/N). Press enter for NO: " -r reply
-if [[ "$reply" =~ ^[Yy]$ ]]; then
-  should_sign_package=true
+# Handle interactive vs non-interactive mode
+if [ "$non_interactive" = false ]; then
+  read -p "Clean previous build artifacts (out/ directory)? (y/N). Press enter for NO: " -r reply
+  if [[ "$reply" =~ ^[Yy]$ ]]; then
+    should_clean_build=true
+  fi
+  read -p "Apply patches? (y/N). Press enter for NO: " -r reply
+  if [[ "$reply" =~ ^[Yy]$ ]]; then
+    should_apply_patches=true
+  fi
+  read -p "Sign and package the application after build? (y/N). Press enter for NO: " -r reply
+  if [[ "$reply" =~ ^[Yy]$ ]]; then
+    should_sign_package=true
+  fi
+else
+  echo "Running in non-interactive mode with default settings:"
+  echo "  - Clean build: $should_clean_build"
+  echo "  - Apply patches: $should_apply_patches"
+  echo "  - Sign package: $should_sign_package"
 fi
 
 # Clean up previous build artifacts
@@ -58,9 +92,14 @@ if [ "$should_apply_patches" = true ]; then
   python3 "$_root_dir/scripts/patches.py" apply "$_src_dir" "$_root_dir/patches"
 fi
 
-# Set build flags by combining flag files
-cat "$_root_dir/scripts/flags.macos.gn" >"$_src_dir/out/$_out_dir/args.gn"
-
+# Set build flags based on build type
+if [ "$release" = true ]; then
+  echo "Using release build configuration..."
+  cat "$_root_dir/scripts/flags.macos.release.gn" >"$_src_dir/out/$_out_dir/args.gn"
+else
+  echo "Using debug build configuration..."
+  cat "$_root_dir/scripts/flags.macos.debug.gn" >"$_src_dir/out/$_out_dir/args.gn"
+fi
 
 # Set target_cpu to the corresponding architecture
 if [[ $_arch == "arm64" ]]; then
