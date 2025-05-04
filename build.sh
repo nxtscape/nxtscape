@@ -87,9 +87,12 @@ fi
 if [ "$should_reset_git" = true ]; then
   echo "Resetting git branch and removing all tracked files..."
   cd "$_src_dir"
-  # TODO: figure out how to clean without removing gn
-  # disabled clean because there are some third_party/build_tools/mac that has gn
-  # git clean -fdx
+  # Clean with exclusions for important directories
+  echo "Running git clean with exclusions for gn and other important tools..."
+  git clean -fdx \
+    --exclude="third_party/" \
+    --exclude="build_tools/" \
+    --exclude="uc_staging/" 
   git reset --hard HEAD
   cd "$_root_dir"
 fi
