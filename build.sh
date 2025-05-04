@@ -55,6 +55,7 @@ _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 should_apply_patches=true
 should_sign_package=true
 should_clean_build=true
+should_reset_git=true
 
 # Handle interactive vs non-interactive mode
 if [ "$non_interactive" = false ]; then
@@ -70,11 +71,27 @@ if [ "$non_interactive" = false ]; then
   if [[ "$reply" =~ ^[Yy]$ ]]; then
     should_sign_package=true
   fi
+  read -p "Reset git branch and remove all tracked files? (y/N). Press enter for NO: " -r reply
+  if [[ "$reply" =~ ^[Yy]$ ]]; then
+    should_reset_git=true
+  fi
 else
   echo "Running in non-interactive mode with default settings:"
   echo "  - Clean build: $should_clean_build"
   echo "  - Apply patches: $should_apply_patches"
   echo "  - Sign package: $should_sign_package"
+  echo "  - Reset git: $should_reset_git"
+fi
+
+# Reset git branch if requested
+if [ "$should_reset_git" = true ]; then
+  echo "Resetting git branch and removing all tracked files..."
+  cd "$_src_dir"
+  # TODO: figure out how to clean without removing gn
+  # disabled clean because there are some third_party/build_tools/mac that has gn
+  # git clean -fdx
+  git reset --hard HEAD
+  cd "$_root_dir"
 fi
 
 # Clean up previous build artifacts

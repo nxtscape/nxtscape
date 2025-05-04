@@ -1,11 +1,5 @@
-commit e9e0d370021704936c72595cce1f14f0f87d15e5
-Author: Felarof <nithin.sonti@gmail.com>
-Date:   Sat Apr 26 21:50:04 2025 -0700
-
-    branding worked
-
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
-index 2e5d2a8929ca8..c340e17579615 100644
+index 9cc0c0701052f..b0decbfb3338d 100644
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
 @@ -294,10 +294,10 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
@@ -36,7 +30,7 @@ index 2e5d2a8929ca8..c340e17579615 100644
          </message>
        </if>
        <if expr="is_chromeos">
-@@ -447,7 +447,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -438,7 +438,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        <if expr="_is_chrome_for_testing_branded">
          <then>
            <message name="IDS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
@@ -69,7 +63,7 @@ index f8363d5b294fe..ad8baa62212ad 100644
  MAC_CREATOR_CODE=Cr24
  MAC_TEAM_ID=
 diff --git a/chrome/enterprise_companion/branding.gni b/chrome/enterprise_companion/branding.gni
-index 6b4469870d693..c5735296201fd 100644
+index 3e626f26396e1..26613fc7bf730 100644
 --- a/chrome/enterprise_companion/branding.gni
 +++ b/chrome/enterprise_companion/branding.gni
 @@ -19,19 +19,19 @@ if (is_chrome_branded) {
@@ -87,13 +81,13 @@ index 6b4469870d693..c5735296201fd 100644
 -  enterprise_companion_product_full_name = "ChromiumEnterpriseCompanion"
 +  enterprise_companion_company_short_name = "Nxtscape"
 +  enterprise_companion_company_short_name_lowercase = "nxtscape"
-+  enterprise_companion_company_short_name_uppercase = "nxtscape"
++  enterprise_companion_company_short_name_uppercase = "NXTSCAPE"
 +  enterprise_companion_product_full_name = "NxtscapeEnterpriseCompanion"
    enterprise_companion_product_full_name_dashed_lowercase =
 -      "chromium-enterprise-companion"
--  enterprise_companion_keystone_app_name = "ChromiumSoftwareUpdate"
+-  keystone_app_name = "ChromiumSoftwareUpdate"
 +      "nxtscape-enterprise-companion"
-+  enterprise_companion_keystone_app_name = "NxtscapeSoftwareUpdate"
++  keystone_app_name = "NxtscapeSoftwareUpdate"
    mac_enterprise_companion_bundle_identifier =
 -      "org.chromium.ChromiumEnterpriseCompanion"
 +      "org.nxtscape.NxtscapeEnterpriseCompanion"
