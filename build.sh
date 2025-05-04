@@ -33,6 +33,58 @@ _root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script 
 _src_dir="$_root_dir/build/src/"  # Chromium source code directory
 _out_dir="Default"
 
+chromium_version="135.0.7049.95"
+
+# Function to copy icons from resources to the Chromium theme directory
+copy_icons() {
+  local src_dir="$1"
+  local chromium_theme_dir="$2"
+  
+  echo "Copying icon files to Chromium theme directory: $chromium_theme_dir"
+
+  if [ -d "$src_dir" ]; then
+    # Main PNG files
+    echo "Copying PNG files..."
+    cp -f "$src_dir/"*.png "$chromium_theme_dir/"
+    
+    # SVG and AI files
+    echo "Copying SVG and AI files..."
+    cp -f "$src_dir/"*.svg "$chromium_theme_dir/"
+    cp -f "$src_dir/"*.ai "$chromium_theme_dir/"
+    
+    # Copy subdirectories
+    echo "Copying platform-specific icons..."
+    
+    # Mac icons
+    if [ -d "$src_dir/mac" ]; then
+      mkdir -p "$chromium_theme_dir/mac"
+      cp -f "$src_dir/mac/"* "$chromium_theme_dir/mac/"
+    fi
+    
+    # Windows icons
+    if [ -d "$src_dir/win" ]; then
+      mkdir -p "$chromium_theme_dir/win"
+      cp -rf "$src_dir/win/"* "$chromium_theme_dir/win/"
+    fi
+    
+    # Linux icons
+    if [ -d "$src_dir/linux" ]; then
+      mkdir -p "$chromium_theme_dir/linux"
+      cp -f "$src_dir/linux/"* "$chromium_theme_dir/linux/"
+    fi
+    
+    # ChromeOS icons
+    if [ -d "$src_dir/chromeos" ]; then
+      mkdir -p "$chromium_theme_dir/chromeos"
+      cp -f "$src_dir/chromeos/"* "$chromium_theme_dir/chromeos/"
+    fi
+    
+    echo "Icon files copied successfully."
+  else
+    echo "Warning: Icon source directory $src_dir not found. Skipping icon copy step."
+  fi
+}
+
 # Parse command line options
 release=false  # Default is debug build
 non_interactive=false  # Default is interactive mode
@@ -52,11 +104,20 @@ shift "$(($OPTIND - 1))"  # Shift positional parameters to access non-option arg
 _arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
 
 # Variables for build steps - will be prompted
-should_apply_patches=true
-should_sign_package=true
-should_clean_build=true
-should_reset_git=true
+# Initialize to false so pressing Enter means "No"
+should_apply_patches=false
+should_sign_package=false
+should_clean_build=false
+should_reset_git=false
 should_clean_git=false
+
+if [ "$non_interactive" = true ]; then
+  should_apply_patches=true
+  should_sign_package=true
+  should_clean_build=true
+  should_reset_git=true
+  should_clean_git=false
+fi
 
 # Handle interactive vs non-interactive mode
 if [ "$non_interactive" = false ]; then
@@ -106,6 +167,19 @@ if [ "$should_clean_git" = true ]; then
     --exclude="build/" 
   cd "$_root_dir"
 fi
+
+# Fetch tags and switch to Chromium version tag
+cd "$_src_dir"
+echo "Fetching tags and switching to Chromium version $chromium_version..."
+git fetch --tags
+git checkout tags/$chromium_version
+
+echo "Running gclient sync with minimal history..."
+# Use --no-history to skip git history and --shallow for minimal checkout
+# These reduce checkout size and time significantly
+gclient sync --no-history --shallow
+cd "$_root_dir"
+
 
 # Clean up previous build artifacts
 if [ "$should_clean_build" = true ]; then
@@ -157,6 +231,10 @@ echo "    to: $_ai_side_panel_dir"
 
 cp -r $_root_dir/files/ai_agent_side_panel/* "$_ai_agent_side_panel_dir"
 cp -r $_root_dir/files/ai_side_panel/* "$_ai_side_panel_dir"
+
+# Copy icons from resources/output to the Chromium theme directory
+_chromium_theme_dir="$_src_dir/chrome/app/theme/chromium"
+copy_icons "$_root_dir/resources/gen" "$_chromium_theme_dir"
 
 # Change to source directory for building
 cd "$_src_dir"
