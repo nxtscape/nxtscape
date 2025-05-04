@@ -1,0 +1,7 @@
+The icons in this directory are used by the Windows version of the browser.
+- chromium.ico: Main application icon
+- incognito.ico: Icon for incognito mode
+- app_list.ico: Icon for app list
+- chromium_doc.ico: Icon for HTML documents
+- chromium_pdf.ico: Icon for PDF documents
+- tiles/: Contains icons used for Windows tiles
