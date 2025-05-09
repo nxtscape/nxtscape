@@ -29,8 +29,8 @@ set -eux
 # Build script for local macOS environment
 
 # Some path variables
-_root_dir=$(dirname $(greadlink -f $0))  # Gets the absolute path of the script directory
-_src_dir="$_root_dir/build/src/"  # Chromium source code directory
+_root_dir=$(dirname $(greadlink -f $0)) # Gets the absolute path of the script directory
+_src_dir="$_root_dir/build/src/"        # Chromium source code directory
 _out_dir="Default"
 
 chromium_version="135.0.7049.95"
@@ -39,46 +39,46 @@ chromium_version="135.0.7049.95"
 copy_icons() {
   local src_dir="$1"
   local chromium_theme_dir="$2"
-  
+
   echo "Copying icon files to Chromium theme directory: $chromium_theme_dir"
 
   if [ -d "$src_dir" ]; then
     # Main PNG files
     echo "Copying PNG files..."
     cp -f "$src_dir/"*.png "$chromium_theme_dir/"
-    
+
     # SVG and AI files
     echo "Copying SVG and AI files..."
     cp -f "$src_dir/"*.svg "$chromium_theme_dir/"
     cp -f "$src_dir/"*.ai "$chromium_theme_dir/"
-    
+
     # Copy subdirectories
     echo "Copying platform-specific icons..."
-    
+
     # Mac icons
     if [ -d "$src_dir/mac" ]; then
       mkdir -p "$chromium_theme_dir/mac"
       cp -f "$src_dir/mac/"* "$chromium_theme_dir/mac/"
     fi
-    
+
     # Windows icons
     if [ -d "$src_dir/win" ]; then
       mkdir -p "$chromium_theme_dir/win"
       cp -rf "$src_dir/win/"* "$chromium_theme_dir/win/"
     fi
-    
+
     # Linux icons
     if [ -d "$src_dir/linux" ]; then
       mkdir -p "$chromium_theme_dir/linux"
       cp -f "$src_dir/linux/"* "$chromium_theme_dir/linux/"
     fi
-    
+
     # ChromeOS icons
     if [ -d "$src_dir/chromeos" ]; then
       mkdir -p "$chromium_theme_dir/chromeos"
       cp -f "$src_dir/chromeos/"* "$chromium_theme_dir/chromeos/"
     fi
-    
+
     echo "Icon files copied successfully."
   else
     echo "Warning: Icon source directory $src_dir not found. Skipping icon copy step."
@@ -86,22 +86,22 @@ copy_icons() {
 }
 
 # Parse command line options
-release=false  # Default is debug build
-non_interactive=false  # Default is interactive mode
+release=false         # Default is debug build
+non_interactive=false # Default is interactive mode
 while getopts 'rn' OPTION; do
   case "$OPTION" in
   r)
-    release=true  # -r option enables release build
+    release=true # -r option enables release build
     ;;
   n)
-    non_interactive=true  # -n option enables non-interactive mode
+    non_interactive=true # -n option enables non-interactive mode
     ;;
   esac
 done
 
-shift "$(($OPTIND - 1))"  # Shift positional parameters to access non-option arguments
+shift "$(($OPTIND - 1))" # Shift positional parameters to access non-option arguments
 
-_arch=${1:-arm64}  # Set build architecture, default to arm64 if not specified
+_arch=${1:-arm64} # Set build architecture, default to arm64 if not specified
 
 # Variables for build steps - will be prompted
 # Initialize to false so pressing Enter means "No"
@@ -116,7 +116,7 @@ if [ "$non_interactive" = true ]; then
   should_sign_package=true
   should_clean_build=true
   should_reset_git=true
-  should_clean_git=false
+  should_clean_git=true
 fi
 
 # Handle interactive vs non-interactive mode
@@ -158,13 +158,15 @@ fi
 if [ "$should_clean_git" = true ]; then
   cd "$_src_dir"
   echo "Running git clean with exclusions for gn and other important tools..."
-  git clean -fdx \
+  # don't use -x it removes .gitignore files too
+  # let's clean only in chrome
+  git clean -fd chrome/ \
     --exclude="third_party/" \
     --exclude="build_tools/" \
     --exclude="uc_staging/" \
     --exclude="buildtools/" \
     --exclude="tools/" \
-    --exclude="build/" 
+    --exclude="build/"
   cd "$_root_dir"
 fi
 
@@ -180,11 +182,10 @@ echo "Running gclient sync with minimal history..."
 gclient sync --no-history --shallow
 cd "$_root_dir"
 
-
 # Clean up previous build artifacts
 if [ "$should_clean_build" = true ]; then
   echo "Cleaning up previous build artifacts..."
-  rm -rf "$_src_dir/out/$_out_dir" || true  # Remove previous output directory
+  rm -rf "$_src_dir/out/$_out_dir" || true # Remove previous output directory
 fi
 
 # Create output directory
@@ -207,9 +208,9 @@ fi
 
 # Set target_cpu to the corresponding architecture
 if [[ $_arch == "arm64" ]]; then
-  echo 'target_cpu = "arm64"' >>"$_src_dir/out/$_out_dir/args.gn"  # For ARM64/Apple Silicon
+  echo 'target_cpu = "arm64"' >>"$_src_dir/out/$_out_dir/args.gn" # For ARM64/Apple Silicon
 else
-  echo 'target_cpu = "x64"' >>"$_src_dir/out/$_out_dir/args.gn"  # For Intel x64
+  echo 'target_cpu = "x64"' >>"$_src_dir/out/$_out_dir/args.gn" # For Intel x64
 fi
 
 # Copy over AI agent and side panel resources
@@ -253,3 +254,4 @@ if [ "$should_sign_package" = true ]; then
   echo "Signing and packaging the application..."
   $_root_dir/sign_and_package_app.sh
 fi
+
