@@ -1,4 +1,4 @@
-From d1eb9a0bd07004473a10ed2bf84ff65af04978d9 Mon Sep 17 00:00:00 2001
+From 7d470e5d70464f2d40bb31140fbb151e5779f73f Mon Sep 17 00:00:00 2001
 From: Nikhil Sonti <nikhilsv92@gmail.com>
 Date: Thu, 8 May 2025 08:00:15 +0100
 Subject: [PATCH] add importer supporter for chrome
@@ -26,13 +26,14 @@ Subject: [PATCH] add importer supporter for chrome
  chrome/common/importer/profile_import.mojom   |   1 +
  ...ofile_import_process_param_traits_macros.h |   4 +-
  chrome/common/pref_names.h                    |   2 +
+ chrome/utility/BUILD.gn                       |   2 +
  chrome/utility/importer/chrome_importer.cc    | 735 ++++++++++++++++++
  chrome/utility/importer/chrome_importer.h     |  91 +++
  .../external_process_importer_bridge.cc       |   7 +
  .../external_process_importer_bridge.h        |   2 +
  chrome/utility/importer/importer_creator.cc   |   3 +
  .../histograms/metadata/sql/histograms.xml    |   1 +
- 28 files changed, 1265 insertions(+), 3 deletions(-)
+ 29 files changed, 1267 insertions(+), 3 deletions(-)
  create mode 100644 chrome/utility/importer/chrome_importer.cc
  create mode 100644 chrome/utility/importer/chrome_importer.h
 
@@ -782,6 +783,19 @@ index 67beb7954b91e..41784b66d5739 100644
  
  #if BUILDFLAG(IS_CHROMEOS)
  // Boolean controlling whether native client is force allowed by policy.
+diff --git a/chrome/utility/BUILD.gn b/chrome/utility/BUILD.gn
+index 185e70a1b7de0..610559189bbef 100644
+--- a/chrome/utility/BUILD.gn
++++ b/chrome/utility/BUILD.gn
+@@ -108,6 +108,8 @@ static_library("utility") {
+       sources += [
+         "importer/firefox_importer.cc",
+         "importer/firefox_importer.h",
++        "importer/chrome_importer.cc",
++        "importer/chrome_importer.h",
+       ]
+     }
+     if (is_mac) {
 diff --git a/chrome/utility/importer/chrome_importer.cc b/chrome/utility/importer/chrome_importer.cc
 new file mode 100644
 index 0000000000000..6853e4ac92e14
