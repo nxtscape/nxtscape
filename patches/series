@@ -1,7 +1,6 @@
 nxtscape/branding.patch
+nxtscape/first-run-nxtscape.patch
+nxtscape/disable-user-gesture-restriction-on-sidepanel.patch
 nxtscape/AI-sidepanel-extension.patch
 nxtscape/ai-agent-side-panel.patch
 nxtscape/add-importer-supporter-for-chrome.patch
-# nxtscape/disable-user-gesture-restriction-on-sidepanel.patch
-# nxtscape/first-run-nxtscape.patch
-# nxtscape/first-run-nxtscape-2.patch
