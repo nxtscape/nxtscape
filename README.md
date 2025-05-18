@@ -45,7 +45,7 @@ Perplexity is a search company. Your browser history will likely be used for ad 
 
 **Coming Soon:**
 - 🛡️ Built‑in LLM based ad blocking.  
-- 🤖 Locally Running “Manus‑style” agents: give high-level goals, let the browser work for you securely on your machine – your data stays local, unlike potential risks with other agents.
+- 🤖 Locally Running "Manus‑style" agents: give high-level goals, let the browser work for you securely on your machine – your data stays local, unlike potential risks with other agents.
 - 💬 Local LLM chat (Ollama & friends) right in the sidebar  
 - 🔍 Semantic search across history & highlights (native highlighter, too)  
 - 🤝 MCP client support natively in browser.
@@ -66,11 +66,22 @@ That's the future we're building with Nxtscape.
 
 Nxtscape is open source! We believe in building _with_ our community.
 
-- **Download:** Grab the latest release at [nxtscape.ai](https://nxtscape.ai)
-- **Discord:** [Link to your Discord server]
-- **Twitter:** [Link to your Twitter handle]
+- 🚀  [Download Nxtscape](https://nxtscape.ai)
+- 💬  Join our [Discord](https://discord.gg/Z33rpYme)
+- 🐦  Follow us on [Twitter/X](https://twitter.com/nxtscape)
 
 **Let's build the next generation browser, together!**
+
+## Acknowledgments 🙏
+
+Nxtscape is built on—and inspired by—other awesome open-source projects:
+
+- [Chromium](https://github.com/chromium/chromium)
+- [Ungoogled Chromium](https://github.com/ungoogled-software/ungoogled-chromium)
+- [Nanobrowser](https://github.com/nanobrowser/nanobrowser)
+- [Browser-use](https://github.com/browser-use/browser-use)
+
+Huge thanks to their creators and contributors!
 
 ## License 📜
 Nxtscape is licensed under MPL license. See the `LICENSE` file for details.

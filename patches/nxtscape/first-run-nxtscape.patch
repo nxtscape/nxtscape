@@ -1,14 +1,14 @@
-From 2b8904886a5cc4a3c7cdd5b5cfb24426af6a92f4 Mon Sep 17 00:00:00 2001
+From 12e202633ff1e358ef6e35fc7d1782b61f5d35a7 Mon Sep 17 00:00:00 2001
 From: Nikhil Sonti <nikhilsv92@gmail.com>
-Date: Sat, 10 May 2025 10:45:54 +0100
-Subject: [PATCH] nxtscape first run
+Date: Sun, 18 May 2025 18:52:02 +0100
+Subject: [PATCH] first run
 
 ---
  chrome/browser/chrome_browser_main.cc         |   1 +
  .../browser/ui/webui/chrome_web_ui_configs.cc |   2 +
- chrome/browser/ui/webui/nxtscape_first_run.h  | 181 ++++++++++++++++++
+ chrome/browser/ui/webui/nxtscape_first_run.h  | 175 ++++++++++++++++++
  chrome/common/webui_url_constants.cc          |   1 +
- 4 files changed, 185 insertions(+)
+ 4 files changed, 179 insertions(+)
  create mode 100644 chrome/browser/ui/webui/nxtscape_first_run.h
 
 diff --git a/chrome/browser/chrome_browser_main.cc b/chrome/browser/chrome_browser_main.cc
@@ -45,10 +45,10 @@ index dd1c0af6d55ca..6ab718e19e375 100644
    map.AddWebUIConfig(std::make_unique<VersionUIConfig>());
 diff --git a/chrome/browser/ui/webui/nxtscape_first_run.h b/chrome/browser/ui/webui/nxtscape_first_run.h
 new file mode 100644
-index 0000000000000..f144e85760430
+index 0000000000000..6a637a2a417c9
 --- /dev/null
 +++ b/chrome/browser/ui/webui/nxtscape_first_run.h
-@@ -0,0 +1,181 @@
+@@ -0,0 +1,175 @@
 +#ifndef CHROME_BROWSER_UI_WEBUI_NXTSCAPE_FIRST_RUN_H_
 +#define CHROME_BROWSER_UI_WEBUI_NXTSCAPE_FIRST_RUN_H_
 +
@@ -132,7 +132,7 @@ index 0000000000000..f144e85760430
 +<base target="_blank">
 +
 +<section class="hero">
-+ <h1>The Open-Source Agentic Browser 🌐</h1>
++ <h1>The Open-Source Agentic Browser 🦊</h1>
 + <p class="sub-headline">Your Browser, Reimagined. ✨</p>
 + <p>We believe browsers must be open source, not owned by search or ad companies. And the future is AI agents automating your work locally and securely. We're building the best browser for that future. 🚀</p>
 + <p style="font-size:0.9em; color: #777;">This page can always be accessed again at <a href="chrome://nxtscape-first-run"><code>chrome://nxtscape-first-run</code></a></p>
@@ -149,14 +149,13 @@ index 0000000000000..f144e85760430
 +</section>
 +
 +<section>
-+ <h2 class="section-title">🤝 Join Our Community & Stay Updated 🤝</h2>
-+ <p style="text-align:center; font-size:1.1em; color:#1967d2; margin-bottom:1em; font-weight:bold;">💬 <strong>Join our Discord for real-time updates, feature announcements, and direct support!</strong> 💬</p>
-+ <p class="community-links" style="text-align:center;">
-+  <a href="https://discord.gg/Z33rpYme" style="font-size:1.2em; padding:0.7em 1.5em; background-color:#5865F2; color:white;">💬 Discord</a>
++ <h2 class="section-title">🤝 Join Our Community & Explore 🤝</h2>
++ <p class="community-links">
++  <a href="https://discord.gg/Z33rpYme">💬 Discord</a>
 +  <a href="https://github.com/nxtscape/nxtscape">💻 GitHub</a>
 +  <a href="https://x.com/nxtscape">🐦 X (Twitter)</a>
 + </p>
-+ <p style="font-size:0.9em; text-align:center; margin-top:1em;">Get exclusive access to early features, connect with the dev team, and help shape the future of Nxtscape!</p>
++ <p style="font-size:0.9em; text-align:center;">Have questions or want to contribute? We'd love to hear from you!</p>
 +</section>
 +
 +<section>
@@ -182,6 +181,19 @@ index 0000000000000..f144e85760430
 +  for information on other common topics.
 +</section>
 +
++<section>
++ <h2>✨ Extra Nxtscape Features ✨</h2>
++ <p>Many unique features introduced by Nxtscape may be disabled by default. These can be enabled in
++  <a href="chrome://flags"><code>chrome://flags</code></a> or as command-line switches. Take a look at
++  <a href="https://github.com/nxtscape/nxtscape">the Nxtscape flags documentation</a> to see what features you may find useful to enable.</p>
++</section>
++
++<section>
++ <h2>🔗 Additional Links 🔗</h2>
++ <p>⭐️ <strong>Support & influence the roadmap:</strong> <a href="https://github.com/nxtscape/nxtscape">Star Nxtscape on GitHub</a>.</p>
++ <p>📝 <strong>Have an idea?</strong> Add or vote for suggestions on our <a href="https://nxtscape.feedbear.com/roadmap">public roadmap</a>.</p>
++ <p>💬 <strong>Join the conversation:</strong> <a href="https://discord.gg/Z33rpYme">Join our Discord</a> for updates and discussion.</p>
++</section>
 +<script>
 + document.getElementById("bdic").onchange = function(e){
 +  var f = new FileReader;
