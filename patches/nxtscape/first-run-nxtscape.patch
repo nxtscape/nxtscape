@@ -99,7 +99,7 @@ index 0000000000000..f144e85760430
 +<meta name="color-scheme" content="light dark">
 +<style>
 + @import url(chrome://resources/css/text_defaults_md.css);
-+ html{color:#202124; background:white; line-height:1.2em; font-family: sans-serif;}
++ html{color:#202124; background:white; line-height:1.2em; font-family: sans-serif; font-size: 1.3em;}
 + a{color:#1967d2; text-decoration: none;}
 + a:hover{text-decoration: underline;}
 + h2{margin:0; padding:0.8em 1.33em; font-size: 1.5em;}
@@ -141,22 +141,22 @@ index 0000000000000..f144e85760430
 +<section>
 + <h2 class="section-title">🌟 Key Features 🌟</h2>
 + <ul class="feature-list">
++  <li>🤖 <strong>AI Agents:</strong> Delegate repetitive tasks and information gathering to local agents that work for you.</li>
++  <li>🧠 <strong>AI Chat & Insights:</strong> Quickly summarize multiple tabs or dense documents with powerful AI assistance.</li>
 +  <li>🔒 <strong>Enhanced Privacy Controls:</strong> Take charge of your data with advanced tracking protection and privacy settings.</li>
-+  <li>⚡ <strong>Blazing Fast Performance:</strong> Experience a speedier web with our optimized engine.</li>
-+  <li>🎨 <strong>Customizable Interface:</strong> Tailor the browser to your liking with flexible themes and options.</li>
-+  <li>🛡️ <strong>Built-in Security:</strong> Browse with confidence thanks to integrated security measures.</li>
 +  <li>🧩 <strong>Seamless Extension Support:</strong> Easily install your favorite extensions!</li>
 + </ul>
 +</section>
 +
 +<section>
-+ <h2 class="section-title">🤝 Join Our Community & Explore 🤝</h2>
-+ <p class="community-links">
-+  <a href="YOUR_DISCORD_LINK_HERE">💬 Discord</a>
-+  <a href="YOUR_GITHUB_LINK_HERE">💻 GitHub</a>
-+  <a href="YOUR_TWITTER_LINK_HERE">🐦 X (Twitter)</a>
++ <h2 class="section-title">🤝 Join Our Community & Stay Updated 🤝</h2>
++ <p style="text-align:center; font-size:1.1em; color:#1967d2; margin-bottom:1em; font-weight:bold;">💬 <strong>Join our Discord for real-time updates, feature announcements, and direct support!</strong> 💬</p>
++ <p class="community-links" style="text-align:center;">
++  <a href="https://discord.gg/Z33rpYme" style="font-size:1.2em; padding:0.7em 1.5em; background-color:#5865F2; color:white;">💬 Discord</a>
++  <a href="https://github.com/nxtscape/nxtscape">💻 GitHub</a>
++  <a href="https://x.com/nxtscape">🐦 X (Twitter)</a>
 + </p>
-+ <p style="font-size:0.9em; text-align:center;">Have questions or want to contribute? We'd love to hear from you!</p>
++ <p style="font-size:0.9em; text-align:center; margin-top:1em;">Get exclusive access to early features, connect with the dev team, and help shape the future of Nxtscape!</p>
 +</section>
 +
 +<section>
@@ -178,28 +178,10 @@ index 0000000000000..f144e85760430
 +  </ol>
 + </details>
 + <p>
-+  <a href="https://ungoogled-software.github.io/ungoogled-chromium-wiki/faq">Check out the FAQ on the wiki</a>
++  <a href="https://github.com/nxtscape/nxtscape">Check out the FAQ on the GitHub</a>
 +  for information on other common topics.
 +</section>
 +
-+<section>
-+ <h2>✨ Extra Nxtscape Features ✨</h2><p>
-+  Many unique features introduced by Nxtscape may be disabled by default. These can be enabled in
-+  <a href="chrome://flags"><code>chrome://flags</code></a> or as command-line switches. Take a look at
-+  <a href="YOUR_FLAGS_DOCUMENTATION_LINK_HERE">
-+   the Nxtscape flags documentation</a> to see what features you may find useful to enable.
-+</section>
-+
-+<section>
-+ <h2>🔗 Additional Links 🔗</h2><p>
-+  For Nxtscape's privacy and security information, motivation, philosophy, and rationale for changes, please see the
-+  <a href="YOUR_README_LINK_HERE">Nxtscape README</a>.<p>
-+  Visit our <a href="YOUR_SUPPORT_PAGE_LINK_HERE">
-+   Nxtscape support page</a> if you wish to report problems.<p>
-+  Are you a developer? Consider
-+  <a href="YOUR_CONTRIBUTING_GUIDE_LINK_HERE">
-+   contributing</a> to Nxtscape!
-+</section>
 +<script>
 + document.getElementById("bdic").onchange = function(e){
 +  var f = new FileReader;
