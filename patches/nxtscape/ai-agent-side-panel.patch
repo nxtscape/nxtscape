@@ -107,7 +107,7 @@ index b73ab6259a19d..c192358b385fc 100644
      "opocihnfjcgcjecjhjjgifkbkgeeoonh";
 +// The extension id of the AI Agent Side Panel extension.
 +inline constexpr char kAIAgentSidePanelExtensionId[] =
-+    "mijbhpjdnjklmbdohhnojodmnjnfilim";
++    "pmokbidihlnlgnihbnjpjpjonahifdnm";
  
  // The extension id of the Calendar application.
  inline constexpr char kCalendarAppId[] = "ejjicmeblgpmajnghnpcppodonldlgfn";
