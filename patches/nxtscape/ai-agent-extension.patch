@@ -80,7 +80,7 @@ index bc7d3cd4b9740..f072fff2426c4 100644
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_SIDE_PANEL_JS" file="ai_agent_side_panel/side-panel/assets/index-DSa3grvl.js" type="BINDATA" />
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_SIDE_PANEL_CSS" file="ai_agent_side_panel/side-panel/assets/index-B_9MwmOl.css" type="BINDATA" />
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_OPTIONS_HTML" file="ai_agent_side_panel/options/index.html" type="BINDATA" />
-+      <include name="IDR_AI_AGENT_SIDE_PANEL_OPTIONS_JS" file="ai_agent_side_panel/options/assets/index-IRi2qSG8.js" type="BINDATA" />
++      <include name="IDR_AI_AGENT_SIDE_PANEL_OPTIONS_JS" file="ai_agent_side_panel/options/assets/index-4hxP9hKT.js" type="BINDATA" />
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_OPTIONS_CSS" file="ai_agent_side_panel/options/assets/index-UqCCP5ht.css" type="BINDATA" />
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_OPTIONS_BASE_CSS" file="ai_agent_side_panel/options/_options.css" type="BINDATA" />
 +      <include name="IDR_AI_AGENT_SIDE_PANEL_ICON32" file="ai_agent_side_panel/icon-32.png" type="BINDATA" />
