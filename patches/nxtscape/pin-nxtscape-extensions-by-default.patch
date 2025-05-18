@@ -1,0 +1,32 @@
+From 135ae3e3a0714d3e990cadcb63bac37f7748ded6 Mon Sep 17 00:00:00 2001
+From: Nikhil Sonti <nikhilsv92@gmail.com>
+Date: Sun, 18 May 2025 16:10:15 +0100
+Subject: [PATCH] Pin nxtscape extensions by default
+
+---
+ chrome/browser/extensions/extension_management.cc | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/chrome/browser/extensions/extension_management.cc b/chrome/browser/extensions/extension_management.cc
+index eb2350fca9490..c8b3e685a7056 100644
+--- a/chrome/browser/extensions/extension_management.cc
++++ b/chrome/browser/extensions/extension_management.cc
+@@ -822,6 +822,15 @@ void ExtensionManagement::Refresh() {
+       }
+     }
+   }
++  
++  // Force-pin AI Side Panel and AI Agent Side Panel extensions
++  // Set toolbar_pin to kForcePinned for AI Side Panel extension
++  auto* ai_side_panel_settings = AccessById(extension_misc::kAISidePanelExtensionId);
++  ai_side_panel_settings->toolbar_pin = ToolbarPinMode::kForcePinned;
++  
++  // Set toolbar_pin to kForcePinned for AI Agent Side Panel extension
++  auto* ai_agent_side_panel_settings = AccessById(extension_misc::kAIAgentSidePanelExtensionId);
++  ai_agent_side_panel_settings->toolbar_pin = ToolbarPinMode::kForcePinned;
+ }
+ 
+ bool ExtensionManagement::ParseById(const std::string& extension_id,
+-- 
+2.49.0
+

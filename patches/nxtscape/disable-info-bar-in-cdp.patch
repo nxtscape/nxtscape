@@ -1,0 +1,25 @@
+From 120a5231cb3df5dc698d4f0db3193050b9114638 Mon Sep 17 00:00:00 2001
+From: Nikhil Sonti <nikhilsv92@gmail.com>
+Date: Sun, 18 May 2025 11:12:33 +0100
+Subject: [PATCH] Disable info bar in CDP
+
+---
+ chrome/browser/extensions/api/debugger/debugger_api.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/chrome/browser/extensions/api/debugger/debugger_api.cc b/chrome/browser/extensions/api/debugger/debugger_api.cc
+index 47a12e57ee45e..837bff2a60aae 100644
+--- a/chrome/browser/extensions/api/debugger/debugger_api.cc
++++ b/chrome/browser/extensions/api/debugger/debugger_api.cc
+@@ -478,7 +478,7 @@ bool ExtensionDevToolsClientHost::Attach() {
+   // infobar warning. See crbug.com/693621.
+   const bool suppress_infobar =
+       suppress_infobar_by_flag ||
+-      Manifest::IsPolicyLocation(extension_->location());
++      Manifest::IsPolicyLocation(extension_->location()) || true;
+ 
+   if (!suppress_infobar) {
+     subscription_ = ExtensionDevToolsInfoBarDelegate::Create(
+-- 
+2.49.0
+
