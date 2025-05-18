@@ -1,10 +1,8 @@
 nxtscape/branding.patch
 nxtscape/first-run-nxtscape.patch
 nxtscape/disable-user-gesture-restriction-on-sidepanel.patch
-nxtscape/ai-agent-extension.patch
 nxtscape/ai-chat-extension.patch
-nxtscape/AI-sidepanel-extension.patch
-nxtscape/ai-agent-side-panel.patch
+nxtscape/ai-agent-extension.patch
 nxtscape/add-importer-supporter-for-chrome.patch
 nxtscape/disable-info-bar-in-cdp.patch
 nxtscape/pin-nxtscape-extensions-by-default.patch
