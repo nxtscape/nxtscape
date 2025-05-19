@@ -1,10 +1,8 @@
 {
   "name": "Chat",
   "description": "A ChatGPT-like side panel extension with page content analysis",
-  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDC0C0AakL+XOcj+PMf24WqoKHA/hhypDQZUUd9sJr/c7cx3nLJS+kaJaB+cz8V3RhPZq01BFeByofLg6Hg6ZNVvBVn3wtGLcNPmuCwMmDiHetTV0oJsFOWs2VznP9py1ww5FFhU+Wmw1CWyLJqnwsIsLLCQyUXAZpVEOLJlOqX1wIDAQAB",
   "version": "1.0",
   "manifest_version": 3,
-  "component": true,
   "action": {
     "default_title": "Open AI Assistant",
     "default_icon": {
@@ -45,11 +43,10 @@
     "service_worker": "background.js"
   },
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval' http://localhost:* http://127.0.0.1:*; object-src 'self'"
   },
   "content_scripts": [
-    {      
-      "run_at": "document_start",
+    {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
