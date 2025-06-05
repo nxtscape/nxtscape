@@ -1,5 +1,17 @@
+From 96ef816788c4e6f0cdc7a7360204da5c99696be3 Mon Sep 17 00:00:00 2001
+From: Nikhil Sonti <nikhilsv92@gmail.com>
+Date: Thu, 5 Jun 2025 08:22:04 -0700
+Subject: [PATCH] branding
+
+---
+ chrome/app/chromium_strings.grd          | 10 +++----
+ chrome/app/theme/chromium/BRANDING       | 16 +++++------
+ chrome/enterprise_companion/branding.gni | 32 ++++++++++-----------
+ chrome/updater/branding.gni              | 36 ++++++++++++------------
+ 4 files changed, 47 insertions(+), 47 deletions(-)
+
 diff --git a/chrome/app/chromium_strings.grd b/chrome/app/chromium_strings.grd
-index 9cc0c0701052f..b0decbfb3338d 100644
+index 2e5d2a8929ca8..c340e17579615 100644
 --- a/chrome/app/chromium_strings.grd
 +++ b/chrome/app/chromium_strings.grd
 @@ -294,10 +294,10 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
@@ -30,7 +42,7 @@ index 9cc0c0701052f..b0decbfb3338d 100644
          </message>
        </if>
        <if expr="is_chromeos">
-@@ -438,7 +438,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
+@@ -447,7 +447,7 @@ If you update this file, be sure also to update google_chrome_strings.grd. -->
        <if expr="_is_chrome_for_testing_branded">
          <then>
            <message name="IDS_ABOUT_VERSION_COMPANY_NAME" desc="Company name on the about pages">
@@ -63,12 +75,39 @@ index f8363d5b294fe..ad8baa62212ad 100644
  MAC_CREATOR_CODE=Cr24
  MAC_TEAM_ID=
 diff --git a/chrome/enterprise_companion/branding.gni b/chrome/enterprise_companion/branding.gni
-index 3e626f26396e1..26613fc7bf730 100644
+index 6b4469870d693..5ff88b0bc1d3e 100644
 --- a/chrome/enterprise_companion/branding.gni
 +++ b/chrome/enterprise_companion/branding.gni
-@@ -19,19 +19,19 @@ if (is_chrome_branded) {
+@@ -1,37 +1,37 @@
+-# Copyright 2014 The Chromium Authors
++# Copyright 2014 The Nxtscape Authors
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
+ 
+ import("//build/config/chrome_build.gni")
+ 
+ if (is_chrome_branded) {
+-  enterprise_companion_crash_product_name = "Chrome_Enterprise_Companion"
++  enterprise_companion_crash_product_name = "Nxtscape_Enterprise_Companion"
+   enterprise_companion_crash_upload_url =
+       "https://clients2.google.com/cr/report"
+   enterprise_companion_appid = "{85eedf37-756c-4972-9399-5a12a4bee148}"
+-  enterprise_companion_company_short_name = "Google"
+-  enterprise_companion_company_short_name_lowercase = "google"
+-  enterprise_companion_company_short_name_uppercase = "GOOGLE"
+-  enterprise_companion_product_full_name = "ChromeEnterpriseCompanion"
++  enterprise_companion_company_short_name = "Nxtscape"
++  enterprise_companion_company_short_name_lowercase = "nxtscape"
++  enterprise_companion_company_short_name_uppercase = "NXTSCAPE"
++  enterprise_companion_product_full_name = "NxtscapeEnterpriseCompanion"
+   enterprise_companion_product_full_name_dashed_lowercase =
+-      "chrome-enterprise-companion"
+-  enterprise_companion_keystone_app_name = "GoogleSoftwareUpdate"
++      "nxtscape-enterprise-companion"
++  enterprise_companion_keystone_app_name = "NxtscapeSoftwareUpdate"
    mac_enterprise_companion_bundle_identifier =
-       "com.google.ChromeEnterpriseCompanion"
+-      "com.google.ChromeEnterpriseCompanion"
++      "com.nxtscape.NxtscapeEnterpriseCompanion"
  } else {
 -  enterprise_companion_crash_product_name = "Chromium_Enterprise_Companion"
 +  enterprise_companion_crash_product_name = "Nxtscape_Enterprise_Companion"
@@ -84,10 +123,9 @@ index 3e626f26396e1..26613fc7bf730 100644
 +  enterprise_companion_company_short_name_uppercase = "NXTSCAPE"
 +  enterprise_companion_product_full_name = "NxtscapeEnterpriseCompanion"
    enterprise_companion_product_full_name_dashed_lowercase =
--      "chromium-enterprise-companion"
--  keystone_app_name = "ChromiumSoftwareUpdate"
-+      "nxtscape-enterprise-companion"
-+  keystone_app_name = "NxtscapeSoftwareUpdate"
+       "chromium-enterprise-companion"
+-  enterprise_companion_keystone_app_name = "ChromiumSoftwareUpdate"
++  enterprise_companion_keystone_app_name = "NxtscapeSoftwareUpdate"
    mac_enterprise_companion_bundle_identifier =
 -      "org.chromium.ChromiumEnterpriseCompanion"
 +      "org.nxtscape.NxtscapeEnterpriseCompanion"
@@ -145,3 +183,6 @@ index 1f9bf5847f642..03a2ec68526a5 100644
    mac_team_identifier = "PLACEHOLDER"
    updater_appid = "{6e8ffa8f-e7e2-4000-9884-589283c27015}"
    qualification_appid = "{43f3a046-04b3-4443-a770-d67dae90e440}"
+-- 
+2.49.0
+

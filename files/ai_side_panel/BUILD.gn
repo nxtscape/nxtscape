@@ -7,19 +7,20 @@ import("//ui/webui/resources/tools/generate_grd.gni")
 generate_grd("build") {
   grd_prefix = "ai_side_panel"
   out_grd = "$target_gen_dir/resources.grd"
-  
+
   input_files = [
     "manifest.json",
     "background.js",
     "content.js",
     "sidepanel.html",
     "sidepanel.js",
-    "styles/chat.css",
-    "styles/globals.css",
-    "icons/icon.png",
-    "icon16.png",
-    "icon48.png",
-    "icon128.png",
+    "options.html",
+    "options.js",
+    "Readability.js",
+    "buildDomTree.js",
+    "assets/icon16.png",
+    "assets/icon48.png",
+    "assets/icon128.png",
   ]
   
   input_files_base_dir = rebase_path(".", "//")

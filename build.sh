@@ -33,7 +33,7 @@ _root_dir=$(dirname $(greadlink -f $0)) # Gets the absolute path of the script d
 _src_dir="$_root_dir/build/src/"        # Chromium source code directory
 _out_dir="Default"
 
-chromium_version="135.0.7049.95"
+chromium_version="137.0.7151.69"
 
 # Function to copy icons from resources to the Chromium theme directory
 copy_icons() {
@@ -254,4 +254,3 @@ if [ "$should_sign_package" = true ]; then
   echo "Signing and packaging the application..."
   $_root_dir/sign_and_package_app.sh
 fi
-
