@@ -19,7 +19,7 @@ index ae782891ad341..5c485d34974e0 100644
 +  // Force-pin AI Side Panel and AI Agent Side Panel extensions
 +  // Set toolbar_pin to kForcePinned for AI Side Panel extension
 +  auto* ai_side_panel_settings = AccessById(extension_misc::kAISidePanelExtensionId);
-+  ai_side_panel_settings->toolbar_pin = ToolbarPinMode::kForcePinned;
++  ai_side_panel_settings->toolbar_pin = ManagedToolbarPinMode::kForcePinned;
  }
  
  bool ExtensionManagement::ParseById(const std::string& extension_id,
