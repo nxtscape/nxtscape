@@ -33,7 +33,7 @@ _root_dir=$(dirname $(greadlink -f $0)) # Gets the absolute path of the script d
 _src_dir="$_root_dir/build/src/"        # Chromium source code directory
 _out_dir="Default"
 
-chromium_version="135.0.7049.95"
+chromium_version=$(cat "$_root_dir/scripts/chromium_version.txt")
 
 # Function to copy icons from resources to the Chromium theme directory
 copy_icons() {
@@ -158,9 +158,9 @@ fi
 if [ "$should_clean_git" = true ]; then
   cd "$_src_dir"
   echo "Running git clean with exclusions for gn and other important tools..."
-  # don't use -x it removes .gitignore files too
+
   # let's clean only in chrome
-  git clean -fd chrome/ \
+  git clean -fdx chrome/ \
     --exclude="third_party/" \
     --exclude="build_tools/" \
     --exclude="uc_staging/" \
@@ -179,7 +179,7 @@ git checkout tags/$chromium_version
 echo "Running gclient sync with minimal history..."
 # Use --no-history to skip git history and --shallow for minimal checkout
 # These reduce checkout size and time significantly
-gclient sync --no-history --shallow
+gclient sync -D --no-history --shallow
 cd "$_root_dir"
 
 # Clean up previous build artifacts
@@ -213,24 +213,18 @@ else
   echo 'target_cpu = "x64"' >>"$_src_dir/out/$_out_dir/args.gn" # For Intel x64
 fi
 
-# Copy over AI agent and side panel resources
-_ai_agent_side_panel_dir="$_src_dir/chrome/browser/resources/ai_agent_side_panel"
+# Copy over AI side panel resources
 _ai_side_panel_dir="$_src_dir/chrome/browser/resources/ai_side_panel"
 
-echo "Creating directories:"
-echo "  $_ai_agent_side_panel_dir"
+echo "Creating directory:"
 echo "  $_ai_side_panel_dir"
 
-mkdir -p "$_ai_agent_side_panel_dir"
 mkdir -p "$_ai_side_panel_dir"
 
 echo "Copying content from felafax-chromium:"
-echo "  from: $_root_dir/files/ai_agent_side_panel"
-echo "    to: $_ai_agent_side_panel_dir"
 echo "  from: $_root_dir/files/ai_side_panel"
 echo "    to: $_ai_side_panel_dir"
 
-cp -r $_root_dir/files/ai_agent_side_panel/* "$_ai_agent_side_panel_dir"
 cp -r $_root_dir/files/ai_side_panel/* "$_ai_side_panel_dir"
 
 # Copy icons from resources/output to the Chromium theme directory
@@ -254,4 +248,3 @@ if [ "$should_sign_package" = true ]; then
   echo "Signing and packaging the application..."
   $_root_dir/sign_and_package_app.sh
 fi
-

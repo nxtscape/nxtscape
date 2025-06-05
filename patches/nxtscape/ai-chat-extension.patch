@@ -1,21 +1,22 @@
-From b809d3add94bd6c038aa616fe1648fbfb65c500f Mon Sep 17 00:00:00 2001
+From fd48e7f91a0e33ca1f7f0b2c6dfb341d94e1fda6 Mon Sep 17 00:00:00 2001
 From: Nikhil Sonti <nikhilsv92@gmail.com>
-Date: Wed, 16 Apr 2025 23:06:45 +0530
-Subject: [PATCH] AI sidepanel integration new
+Date: Thu, 5 Jun 2025 15:26:13 -0700
+Subject: [PATCH] ai-chat-extension
 
 ---
- chrome/browser/browser_resources.grd          |   1 +
- .../allowlist.cc                              |   2 +
- chrome/browser/extensions/component_loader.cc |   3 +
- .../component_extension_resources.grd         |  13 +
- .../common/extensions/extension_constants.h   |   3 +
- 18 files changed, 1041 insertions(+)
+ chrome/browser/browser_resources.grd             |  1 +
+ .../component_extensions_allowlist/allowlist.cc  |  2 ++
+ chrome/browser/extensions/component_loader.cc    |  3 +++
+ chrome/browser/resources/BUILD.gn                |  1 +
+ .../resources/component_extension_resources.grd  | 16 +++++++++++++++-
+ chrome/common/extensions/extension_constants.h   |  3 +++
+ 6 files changed, 25 insertions(+), 1 deletion(-)
 
 diff --git a/chrome/browser/browser_resources.grd b/chrome/browser/browser_resources.grd
-index 03d941670b8cd..f1d592a6dd64c 100644
+index 533d97a0d7e02..80f296feed297 100644
 --- a/chrome/browser/browser_resources.grd
 +++ b/chrome/browser/browser_resources.grd
-@@ -237,6 +237,7 @@
+@@ -238,6 +238,7 @@
          <include name="IDR_CERT_MANAGER_DIALOG_HTML" file="resources\certificate_manager\certificate_manager_dialog.html" type="BINDATA" />
          <include name="IDR_CERT_MANAGER_DIALOG_V2_HTML" file="resources\certificate_manager\certificate_manager_dialog_v2.html" type="BINDATA" />
        </if>
@@ -44,10 +45,10 @@ index b818225467c01..b2e9219008a54 100644
  #if BUILDFLAG(IS_CHROMEOS)
      // Separate ChromeOS list, as it is quite large.
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index 06b3cd1444078..ae47c19ceaa67 100644
+index 97868e0d32ffc..12ba5765f1cd3 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
-@@ -532,6 +532,9 @@ void ComponentLoader::AddDefaultComponentExtensionsWithBackgroundPages(
+@@ -543,6 +543,9 @@ void ComponentLoader::AddDefaultComponentExtensionsWithBackgroundPages(
         command_line->HasSwitch(
             ::switches::kDisableComponentExtensionsWithBackgroundPages));
  
@@ -58,7 +59,7 @@ index 06b3cd1444078..ae47c19ceaa67 100644
    const bool enable_hangout_services_extension_for_testing =
        command_line->HasSwitch(::switches::kTestType) &&
 diff --git a/chrome/browser/resources/BUILD.gn b/chrome/browser/resources/BUILD.gn
-index dc603ec1540ba..9fc3dfaf6f425 100644
+index ecc70941cd1f4..b479c135ceffe 100644
 --- a/chrome/browser/resources/BUILD.gn
 +++ b/chrome/browser/resources/BUILD.gn
 @@ -19,6 +19,7 @@ group("resources") {
@@ -70,29 +71,32 @@ index dc603ec1540ba..9fc3dfaf6f425 100644
  
    if (!is_android) {
 diff --git a/chrome/browser/resources/component_extension_resources.grd b/chrome/browser/resources/component_extension_resources.grd
-index 16679059ebc52..bc7d3cd4b9740 100644
+index 2e355c8ce7c2f..b28e2ea247fc5 100644
 --- a/chrome/browser/resources/component_extension_resources.grd
 +++ b/chrome/browser/resources/component_extension_resources.grd
-@@ -78,6 +78,19 @@
-       <include name="IDS_READING_MODE_DARK_PNG" file="side_panel/read_anything/images/read_anything_dark.png" type="BINDATA" />
-       <include name="IDS_READING_MODE_YELLOW_PNG" file="side_panel/read_anything/images/read_anything_yellow.png" type="BINDATA" />
-       <include name="IDS_READING_MODE_BLUE_PNG" file="side_panel/read_anything/images/read_anything_blue.png" type="BINDATA" />
+@@ -12,7 +12,21 @@
+   </outputs>
+   <release seq="1">
+     <includes>
+-      <include name="IDR_NETWORK_SPEECH_SYNTHESIS_JS" file="network_speech_synthesis/tts_extension.js" type="BINDATA" />
++    <!-- AI Side Panel Extension -->
++    <include name="IDR_AI_SIDE_PANEL_MANIFEST" file="ai_side_panel/manifest.json" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_BACKGROUND_JS" file="ai_side_panel/background.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_CONTENT_JS" file="ai_side_panel/content.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_SIDEPANEL_HTML" file="ai_side_panel/sidepanel.html" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_SIDEPANEL_JS" file="ai_side_panel/sidepanel.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_OPTIONS_HTML" file="ai_side_panel/options.html" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_OPTIONS_JS" file="ai_side_panel/options.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_READABILITY_JS" file="ai_side_panel/Readability.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_BUILDDOMTREE_JS" file="ai_side_panel/buildDomTree.js" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_ICON16" file="ai_side_panel/assets/icon16.png" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_ICON48" file="ai_side_panel/assets/icon48.png" type="BINDATA" />
++    <include name="IDR_AI_SIDE_PANEL_ICON128" file="ai_side_panel/assets/icon128.png" type="BINDATA" />
 +
-+      <!-- AI Side Panel Extension -->
-+      <include name="IDR_AI_SIDE_PANEL_MANIFEST" file="ai_side_panel/manifest.json" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_BACKGROUND_JS" file="ai_side_panel/background.js" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_CONTENT_JS" file="ai_side_panel/content.js" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_SIDEPANEL_HTML" file="ai_side_panel/sidepanel.html" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_SIDEPANEL_JS" file="ai_side_panel/sidepanel.js" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_CHAT_CSS" file="ai_side_panel/styles/chat.css" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_GLOBALS_CSS" file="ai_side_panel/styles/globals.css" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_ICON16" file="ai_side_panel/icon16.png" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_ICON48" file="ai_side_panel/icon48.png" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_ICON128" file="ai_side_panel/icon128.png" type="BINDATA" />
-+      <include name="IDR_AI_SIDE_PANEL_ICON" file="ai_side_panel/icons/icon.png" type="BINDATA" />
-     </includes>
++     <include name="IDR_NETWORK_SPEECH_SYNTHESIS_JS" file="network_speech_synthesis/tts_extension.js" type="BINDATA" />
  
-     <!-- Game Controls lottie json files -->
+       <include name="IDR_NETWORK_SPEECH_SYNTHESIS_MV3_AUDIO_HTML" file="network_speech_synthesis/mv3/audio.html" type="BINDATA" />
+       <include name="IDR_NETWORK_SPEECH_SYNTHESIS_MV3_AUDIO_JS" file="network_speech_synthesis/mv3/audio.js" type="BINDATA" />
 diff --git a/chrome/common/extensions/extension_constants.h b/chrome/common/extensions/extension_constants.h
 index 7a46135d8fa99..b73ab6259a19d 100644
 --- a/chrome/common/extensions/extension_constants.h
