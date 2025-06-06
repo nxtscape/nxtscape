@@ -4,3 +4,4 @@ build/
 dmg/
 scripts/__pycache__/
 scripts/patches/__pycache__/
+releases/

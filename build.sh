@@ -158,9 +158,9 @@ fi
 if [ "$should_clean_git" = true ]; then
   cd "$_src_dir"
   echo "Running git clean with exclusions for gn and other important tools..."
-  # don't use -x it removes .gitignore files too
+
   # let's clean only in chrome
-  git clean -fd chrome/ \
+  git clean -fdx chrome/ \
     --exclude="third_party/" \
     --exclude="build_tools/" \
     --exclude="uc_staging/" \
@@ -179,7 +179,7 @@ git checkout tags/$chromium_version
 echo "Running gclient sync with minimal history..."
 # Use --no-history to skip git history and --shallow for minimal checkout
 # These reduce checkout size and time significantly
-gclient sync --no-history --shallow
+gclient sync -D --no-history --shallow
 cd "$_root_dir"
 
 # Clean up previous build artifacts
