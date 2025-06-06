@@ -33,7 +33,7 @@ _root_dir=$(dirname $(greadlink -f $0)) # Gets the absolute path of the script d
 _src_dir="$_root_dir/build/src/"        # Chromium source code directory
 _out_dir="Default"
 
-chromium_version="137.0.7151.69"
+chromium_version=$(cat "$_root_dir/scripts/chromium_version.txt")
 
 # Function to copy icons from resources to the Chromium theme directory
 copy_icons() {
