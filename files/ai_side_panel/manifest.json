@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Parallel Manus Agent",
+  "name": "Nxtscape Agent",
   "version": "0.1.0",
-  "description": "Chrome extension for automated web tasks using LLM-powered agents",
+  "description": "Nxtscape agent",
   "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDC0C0AakL+XOcj+PMf24WqoKHA/hhypDQZUUd9sJr/c7cx3nLJS+kaJaB+cz8V3RhPZq01BFeByofLg6Hg6ZNVvBVn3wtGLcNPmuCwMmDiHetTV0oJsFOWs2VznP9py1ww5FFhU+Wmw1CWyLJqnwsIsLLCQyUXAZpVEOLJlOqX1wIDAQAB",
   "permissions": [
     "activeTab",
