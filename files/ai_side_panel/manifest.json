@@ -31,7 +31,15 @@
   "side_panel": {
     "default_path": "sidepanel.html"
   },
-  "options_page": "options.html",
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Ctrl+E",
+        "mac": "Command+E"
+      },
+      "description": "Toggle the Nxtscape side panel"
+    }
+  },
   "content_scripts": [
     {
       "matches": [
