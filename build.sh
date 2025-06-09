@@ -213,24 +213,18 @@ else
   echo 'target_cpu = "x64"' >>"$_src_dir/out/$_out_dir/args.gn" # For Intel x64
 fi
 
-# Copy over AI agent and side panel resources
-_ai_agent_side_panel_dir="$_src_dir/chrome/browser/resources/ai_agent_side_panel"
+# Copy over AI side panel resources
 _ai_side_panel_dir="$_src_dir/chrome/browser/resources/ai_side_panel"
 
-echo "Creating directories:"
-echo "  $_ai_agent_side_panel_dir"
+echo "Creating directory:"
 echo "  $_ai_side_panel_dir"
 
-mkdir -p "$_ai_agent_side_panel_dir"
 mkdir -p "$_ai_side_panel_dir"
 
 echo "Copying content from felafax-chromium:"
-echo "  from: $_root_dir/files/ai_agent_side_panel"
-echo "    to: $_ai_agent_side_panel_dir"
 echo "  from: $_root_dir/files/ai_side_panel"
 echo "    to: $_ai_side_panel_dir"
 
-cp -r $_root_dir/files/ai_agent_side_panel/* "$_ai_agent_side_panel_dir"
 cp -r $_root_dir/files/ai_side_panel/* "$_ai_side_panel_dir"
 
 # Copy icons from resources/output to the Chromium theme directory
