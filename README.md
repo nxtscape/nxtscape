@@ -1,8 +1,10 @@
 <div align="center">
 <img src="resources/fox-new.png" alt="nxtscape-fox" width="40%">
 
-# The Open-source Agentic Browser 🦊
-Nxtscape is an open-source **agentic browser** – your privacy-first alternative to closed-source browsers (like Arc, Comet). Built on Chromium, Nxtscape lets you run **Manus like agents** locally and boost your productivity with an AI-sidekick.
+# The Open-source Agentic Browser.
+Nxtscape ("next-scape") is an open-source **agentic browser** – your privacy-first alternative to closed-source browsers (like Arc, Dia, Perplexity Comet). Built on Chromium, Nxtscape lets you run **Manus like agents** locally and boost your productivity with an AI-sidekick.
+
+We'd love to hear what problems you'd like to see solved! Share your ideas through our [anonymous form](https://dub.sh/nxtscape-feature-request).
 
 </div>
 
@@ -22,19 +24,18 @@ We spend half our lives in browsers, but they haven't really evolved. We're drow
 - Automates repetitive tasks - let agents do the boring stuff while you focus on what matters
 - Guards your privacy like a watchdog - your data stays yours, always
 
-That's not just a vision. That's what we're building with Nxtscape.
+That's not just a vision. That's what we're building with Nxtscape. Join [our waitlist](https://nxtscape.ai), we'll send you the download link soon!
 
 
 ## Features 🎁
 - 🏠 Feels like home - works with all your Chrome extensions
+- 🤖 AI agents that run locally - tell them what you want done and they'll browse for you (your data never leaves your machine)
+- 💬 Chat with AI right in the sidebar using local models - keep your private stuff private
+- 🔍 Smart search that understands what you're looking for in your history and saved highlights
+- 🤝 Works with MCP tools right out of the box
 - 🔓 Open source and community driven - see exactly what's happening under the hood
 - 🔒 Your browsing history stays on your computer, not in the cloud
 - 🛡️ Built-in AI ad blocker that actually works
-- 🤖 AI agents that run locally - tell them what you want done and they'll browse for you (your data never leaves your machine)
-- 💬 Chat with AI right in the sidebar using local models - keep your private stuff private
-- ⚔️ Clash of GPTs - ask one question, get answers from ChatGPT, Claude, Gemini and more side-by-side
-- 🔍 Smart search that understands what you're looking for in your history and saved highlights
-- 🤝 Works with MCP tools right out of the box
 
 ## 🤔 Why a new Browser, Not Just an Extension?
 Extensions are great, but they hit walls. To build the future we imagine, we need more control:
@@ -76,7 +77,9 @@ Nxtscape is open source! We believe in building _with_ our community. Let us kno
 - 💬  Join our [Discord](https://discord.gg/Z33rpYme)
 - 🐦  Follow us on [Twitter/X](https://twitter.com/nxtscape)
 
+## Acknowledgments 🙏
 
+We couldn't have built Nxtscape without these amazing open-source projects: [Chromium](https://github.com/chromium/chromium), [browser-use](https://github.com/browser-use/browser-use), [Nanobrowser](https://github.com/nanobrowser/nanobrowser), and [Stagehand](https://github.com/browserbase/stagehand). Huge thanks to all the contributors!
 ## License 📜
 Nxtscape is licensed under MPL license. See the `LICENSE` file for details.
 
