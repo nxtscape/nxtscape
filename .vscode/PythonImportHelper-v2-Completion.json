@@ -1,0 +1,267 @@
+[
+    {
+        "label": "argparse",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "argparse",
+        "description": "argparse",
+        "detail": "argparse",
+        "documentation": {}
+    },
+    {
+        "label": "enum",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "enum",
+        "description": "enum",
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "platform",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "platform",
+        "description": "platform",
+        "detail": "platform",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "get_logger",
+        "importPath": "_common",
+        "description": "_common",
+        "isExtraImport": true,
+        "detail": "_common",
+        "documentation": {}
+    },
+    {
+        "label": "parse_series",
+        "importPath": "_common",
+        "description": "_common",
+        "isExtraImport": true,
+        "detail": "_common",
+        "documentation": {}
+    },
+    {
+        "label": "add_common_params",
+        "importPath": "_common",
+        "description": "_common",
+        "isExtraImport": true,
+        "detail": "_common",
+        "documentation": {}
+    },
+    {
+        "label": "PlatformEnum",
+        "kind": 6,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "class PlatformEnum(enum.Enum):\n    \"\"\"Enum for platforms that need distinction for certain functionality\"\"\"\n    UNIX = 'unix' # Currently covers anything that isn't Windows\n    WINDOWS = 'windows'\nclass ExtractorEnum: #pylint: disable=too-few-public-methods\n    \"\"\"Enum for extraction binaries\"\"\"\n    SEVENZIP = '7z'\n    TAR = 'tar'\n    WINRAR = 'winrar'\nclass SetLogLevel(argparse.Action): #pylint: disable=too-few-public-methods",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "ExtractorEnum",
+        "kind": 6,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "class ExtractorEnum: #pylint: disable=too-few-public-methods\n    \"\"\"Enum for extraction binaries\"\"\"\n    SEVENZIP = '7z'\n    TAR = 'tar'\n    WINRAR = 'winrar'\nclass SetLogLevel(argparse.Action): #pylint: disable=too-few-public-methods\n    \"\"\"Sets logging level based on command line arguments it receives\"\"\"\n    def __init__(self, option_strings, dest, nargs=None, **kwargs):\n        super().__init__(option_strings, dest, nargs=nargs, **kwargs)\n    def __call__(self, parser, namespace, value, option_string=None):",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "SetLogLevel",
+        "kind": 6,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "class SetLogLevel(argparse.Action): #pylint: disable=too-few-public-methods\n    \"\"\"Sets logging level based on command line arguments it receives\"\"\"\n    def __init__(self, option_strings, dest, nargs=None, **kwargs):\n        super().__init__(option_strings, dest, nargs=nargs, **kwargs)\n    def __call__(self, parser, namespace, value, option_string=None):\n        if option_string in ('--verbose', '-v'):\n            value = logging.DEBUG\n        elif option_string in ('--quiet', '-q'):\n            value = logging.ERROR\n        else:",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "get_logger",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def get_logger(initial_level=logging.INFO):\n    \"\"\"Gets the named logger\"\"\"\n    logger = logging.getLogger(LOGGER_NAME)\n    if logger.level == logging.NOTSET:\n        logger.setLevel(initial_level)\n        if not logger.hasHandlers():\n            console_handler = logging.StreamHandler()\n            console_handler.setLevel(initial_level)\n            format_string = '%(levelname)s: %(message)s'\n            formatter = logging.Formatter(format_string)",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "set_logging_level",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def set_logging_level(logging_level):\n    \"\"\"Sets logging level of logger and all its handlers\"\"\"\n    if not logging_level:\n        logging_level = logging.INFO\n    logger = get_logger()\n    logger.setLevel(logging_level)\n    if logger.hasHandlers():\n        for hdlr in logger.handlers:\n            hdlr.setLevel(logging_level)\n    return logger",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "get_running_platform",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def get_running_platform():\n    \"\"\"\n    Returns a PlatformEnum value indicating the platform that utils is running on.\n    NOTE: Platform detection should only be used when no cross-platform alternative is available.\n    \"\"\"\n    uname = platform.uname()\n    # detect native python and WSL\n    if uname.system == 'Windows' or 'Microsoft' in uname.release:\n        return PlatformEnum.WINDOWS\n    # Only Windows and UNIX-based platforms need to be distinguished right now.",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "get_chromium_version",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def get_chromium_version():\n    \"\"\"Returns the Chromium version.\"\"\"\n    return (Path(__file__).parent.parent / 'chromium_version.txt').read_text().strip()\ndef parse_series(series_path):\n    \"\"\"\n    Returns an iterator of paths over the series file\n    series_path is a pathlib.Path to the series file\n    \"\"\"\n    with series_path.open(encoding=ENCODING) as series_file:\n        series_lines = series_file.read().splitlines()",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "parse_series",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def parse_series(series_path):\n    \"\"\"\n    Returns an iterator of paths over the series file\n    series_path is a pathlib.Path to the series file\n    \"\"\"\n    with series_path.open(encoding=ENCODING) as series_file:\n        series_lines = series_file.read().splitlines()\n    # Filter blank lines\n    series_lines = filter(len, series_lines)\n    # Filter comment lines",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "add_common_params",
+        "kind": 2,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "def add_common_params(parser):\n    \"\"\"\n    Adds common command line arguments to a parser.\n    \"\"\"\n    # Logging levels\n    logging_group = parser.add_mutually_exclusive_group()\n    logging_group.add_argument(\n        '--log-level',\n        action=SetLogLevel,\n        choices=['FATAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'],",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "ENCODING",
+        "kind": 5,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "ENCODING = 'UTF-8' # For config files and patches\nUSE_REGISTRY = '_use_registry'\nLOGGER_NAME = 'ungoogled'\n# Public classes\nclass PlatformEnum(enum.Enum):\n    \"\"\"Enum for platforms that need distinction for certain functionality\"\"\"\n    UNIX = 'unix' # Currently covers anything that isn't Windows\n    WINDOWS = 'windows'\nclass ExtractorEnum: #pylint: disable=too-few-public-methods\n    \"\"\"Enum for extraction binaries\"\"\"",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "USE_REGISTRY",
+        "kind": 5,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "USE_REGISTRY = '_use_registry'\nLOGGER_NAME = 'ungoogled'\n# Public classes\nclass PlatformEnum(enum.Enum):\n    \"\"\"Enum for platforms that need distinction for certain functionality\"\"\"\n    UNIX = 'unix' # Currently covers anything that isn't Windows\n    WINDOWS = 'windows'\nclass ExtractorEnum: #pylint: disable=too-few-public-methods\n    \"\"\"Enum for extraction binaries\"\"\"\n    SEVENZIP = '7z'",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "LOGGER_NAME",
+        "kind": 5,
+        "importPath": "scripts._common",
+        "description": "scripts._common",
+        "peekOfCode": "LOGGER_NAME = 'ungoogled'\n# Public classes\nclass PlatformEnum(enum.Enum):\n    \"\"\"Enum for platforms that need distinction for certain functionality\"\"\"\n    UNIX = 'unix' # Currently covers anything that isn't Windows\n    WINDOWS = 'windows'\nclass ExtractorEnum: #pylint: disable=too-few-public-methods\n    \"\"\"Enum for extraction binaries\"\"\"\n    SEVENZIP = '7z'\n    TAR = 'tar'",
+        "detail": "scripts._common",
+        "documentation": {}
+    },
+    {
+        "label": "find_and_check_patch",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def find_and_check_patch(patch_bin_path=None):\n    \"\"\"\n    Find and/or check the patch binary is working. It finds a path to patch in this order:\n    1. Use patch_bin_path if it is not None\n    2. See if \"PATCH_BIN\" environment variable is set\n    3. Do \"which patch\" to find GNU patch\n    Then it does some sanity checks to see if the patch command is valid.\n    Returns the path to the patch binary found.\n    \"\"\"\n    if patch_bin_path is None:",
+        "detail": "scripts.patches",
+        "documentation": {}
+    },
+    {
+        "label": "dry_run_check",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def dry_run_check(patch_path, tree_path, patch_bin_path=None):\n    \"\"\"\n    Run patch --dry-run on a patch\n    tree_path is the pathlib.Path of the source tree to patch\n    patch_path is a pathlib.Path to check\n    reverse is whether the patches should be reversed\n    patch_bin_path is the pathlib.Path of the patch binary, or None to find it automatically\n        See find_and_check_patch() for logic to find \"patch\"\n    Returns the status code, stdout, and stderr of patch --dry-run\n    \"\"\"",
+        "detail": "scripts.patches",
+        "documentation": {}
+    },
+    {
+        "label": "apply_patches",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def apply_patches(patch_path_iter, tree_path, reverse=False, patch_bin_path=None):\n    \"\"\"\n    Applies or reverses a list of patches\n    tree_path is the pathlib.Path of the source tree to patch\n    patch_path_iter is a list or tuple of pathlib.Path to patch files to apply\n    reverse is whether the patches should be reversed\n    patch_bin_path is the pathlib.Path of the patch binary, or None to find it automatically\n        See find_and_check_patch() for logic to find \"patch\"\n    Raises ValueError if the patch binary could not be found.\n    \"\"\"",
+        "detail": "scripts.patches",
+        "documentation": {}
+    },
+    {
+        "label": "generate_patches_from_series",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def generate_patches_from_series(patches_dir, resolve=False):\n    \"\"\"Generates pathlib.Path for patches from a directory in GNU Quilt format\"\"\"\n    for patch_path in parse_series(patches_dir / 'series'):\n        if resolve:\n            yield (patches_dir / patch_path).resolve()\n        else:\n            yield patch_path\ndef _copy_files(path_iter, source, destination):\n    \"\"\"Copy files from source to destination with relative paths from path_iter\"\"\"\n    for path in path_iter:",
+        "detail": "scripts.patches",
+        "documentation": {}
+    },
+    {
+        "label": "merge_patches",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def merge_patches(source_iter, destination, prepend=False):\n    \"\"\"\n    Merges GNU quilt-formatted patches directories from sources into destination\n    destination must not already exist, unless prepend is True. If prepend is True, then\n    the source patches will be prepended to the destination.\n    \"\"\"\n    series = []\n    known_paths = set()\n    if destination.exists():\n        if prepend:",
+        "detail": "scripts.patches",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "scripts.patches",
+        "description": "scripts.patches",
+        "peekOfCode": "def main():\n    \"\"\"CLI Entrypoint\"\"\"\n    parser = argparse.ArgumentParser()\n    add_common_params(parser)\n    subparsers = parser.add_subparsers()\n    apply_parser = subparsers.add_parser(\n        'apply', help='Applies patches (in GNU Quilt format) to the specified source tree')\n    apply_parser.add_argument('--patch-bin',\n                              help='The GNU patch command to use. Omit to find it automatically.')\n    apply_parser.add_argument('target', type=Path, help='The directory tree to apply patches onto.')",
+        "detail": "scripts.patches",
+        "documentation": {}
+    }
+]
