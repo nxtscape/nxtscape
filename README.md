@@ -2,9 +2,7 @@
 <img src="resources/fox-new.png" alt="nxtscape-fox" width="40%">
 
 # The Open-source Agentic Browser.
-Nxtscape ("next-scape") is an open-source **agentic browser** – your privacy-first alternative to closed-source browsers (like Arc, Dia, Perplexity Comet). Built on Chromium, Nxtscape lets you run **Manus like agents** locally and boost your productivity with an AI-sidekick.
-
-We'd love to hear what problems you'd like to see solved! Share your ideas through our [anonymous form](https://dub.sh/nxtscape-feature-request).
+Nxtscape is an open-source **agentic browser** – your privacy-first alternative to closed-source browsers (like Arc, Dia, Perplexity Comet). Built on Chromium, Nxtscape lets you run **Manus like agents** locally and boost your productivity with an AI-sidekick.
 
 </div>
 
@@ -24,7 +22,7 @@ We spend half our lives in browsers, but they haven't really evolved. We're drow
 - Automates repetitive tasks - let agents do the boring stuff while you focus on what matters
 - Guards your privacy like a watchdog - your data stays yours, always
 
-That's not just a vision. That's what we're building with Nxtscape. Join [our waitlist](https://nxtscape.ai), we'll send you the download link soon!
+That's not just a vision. That's what we're building with Nxtscape.
 
 
 ## Features 🎁
@@ -63,11 +61,14 @@ Perplexity is a search company. Your browser history will likely be used for ad 
 
 <div align="center">
 
-### 🤖 AI Agents in Action
+### 🤖 AI Agents in Action (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-agent.mp4" target="_blank">video</a>)
 <img src="resources/nxtscape-agent.gif" alt="AI Agents in Action" width="80%">
 
-### 💬 Local AI Chat
+### 💬 Local AI Chat (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-chat.mp4" target="_blank">video</a>)
 <img src="resources/nxtscape-chat.gif" alt="Local AI Chat" width="80%">
+
+### ⚡ Productivity (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-productivity.mp4" target="_blank">video</a>)
+<img src="resources/nxtscape-productivity.gif" alt="Productivity" width="80%">
 
 </div>
 
