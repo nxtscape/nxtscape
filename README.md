@@ -63,11 +63,14 @@ Perplexity is a search company. Your browser history will likely be used for ad 
 
 <div align="center">
 
-### 🤖 AI Agents in Action
+### 🤖 AI Agents in Action (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-agent.mp4" target="_blank">video</a>)
 <img src="resources/nxtscape-agent.gif" alt="AI Agents in Action" width="80%">
 
-### 💬 Local AI Chat
+### 💬 Local AI Chat (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-chat.mp4" target="_blank">video</a>)
 <img src="resources/nxtscape-chat.gif" alt="Local AI Chat" width="80%">
+
+### ⚡ Productivity (<a href="https://storage.googleapis.com/felafax-public/nxtscape/nxtscape-productivity.mp4" target="_blank">video</a>)
+<img src="resources/nxtscape-productivity.gif" alt="Productivity" width="80%">
 
 </div>
 
