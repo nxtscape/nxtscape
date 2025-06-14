@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Nxtscape Browser</title>
+    <link>https://updates.nxtscape.com/sparkle/appcast.xml</link>
+    <description>Most recent changes with links to updates.</description>
+    <language>en</language>
+    
+    <!-- Latest Version -->
+    <item>
+      <title>Version 1.0.0</title>
+      <description><![CDATA[
+        <h2>Nxtscape Browser 1.0.0</h2>
+        <p>Initial release of Nxtscape Browser - a privacy-focused Chromium fork.</p>
+        
+        <h3>Features</h3>
+        <ul>
+          <li>Built on latest Chromium</li>
+          <li>Enhanced privacy controls</li>
+          <li>Automatic updates via Sparkle</li>
+          <li>Optimized for macOS</li>
+        </ul>
+        
+        <h3>System Requirements</h3>
+        <ul>
+          <li>macOS 10.15 (Catalina) or later</li>
+          <li>Apple Silicon or Intel Mac</li>
+        </ul>
+      ]]></description>
+      <pubDate>Thu, 13 Jun 2024 10:47:00 +0000</pubDate>
+      <sparkle:version>1.0.0</sparkle:version>
+      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
+      <enclosure url="YOUR_SERVER_URL/nxtscape.dmg"
+                 sparkle:edSignature="Hw2eC2ehQKmw4eD8Z0QhM9+fEtQxgUb7WvFU8jENCFB1YkzH0CltxBc9sSkjGJnix4VZHyoPl2VhwO0Z6fElAg=="
+                 length="126973337"
+                 type="application/octet-stream" />
+    </item>
+    
+  </channel>
+</rss>
