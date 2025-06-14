@@ -77,7 +77,7 @@ Perplexity is a search company. Your browser history will likely be used for ad 
 ## Get Involved! 🙌
 Nxtscape is open source! We believe in building _with_ our community. Let us know what features you want!
 
-- 💬  Join our [Discord](https://discord.gg/Z33rpYme)
+- 💬  Join our [Discord](https://discord.gg/YKwjt5vuKr)
 - 🐦  Follow us on [Twitter/X](https://twitter.com/nxtscape)
 
 ## Acknowledgments 🙏
