@@ -3,7 +3,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Nxtscape Browser</title>
-    <link>https://updates.nxtscape.com/sparkle/appcast.xml</link>
+    <link>https://nxtscape.github.io/nxtscape/appcast.xml</link>
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
     
@@ -30,9 +30,9 @@
       ]]></description>
       <pubDate>Thu, 13 Jun 2024 10:47:00 +0000</pubDate>
       <sparkle:version>1.0.0</sparkle:version>
-      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:shortVersionString>0.5.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>10.15</sparkle:minimumSystemVersion>
-      <enclosure url="YOUR_SERVER_URL/nxtscape.dmg"
+      <enclosure url="https://storage.googleapis.com/nxtscape/nxtscape-0.5.0.dmg"
                  sparkle:edSignature="Hw2eC2ehQKmw4eD8Z0QhM9+fEtQxgUb7WvFU8jENCFB1YkzH0CltxBc9sSkjGJnix4VZHyoPl2VhwO0Z6fElAg=="
                  length="126973337"
                  type="application/octet-stream" />
