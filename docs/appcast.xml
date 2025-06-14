@@ -9,17 +9,21 @@
     
     <!-- Latest Version -->
     <item>
-      <title>Version 1.0.0</title>
+      <title>Version 0.5.0</title>
       <description><![CDATA[
-        <h2>Nxtscape Browser 1.0.0</h2>
-        <p>Initial release of Nxtscape Browser - a privacy-focused Chromium fork.</p>
+        <h2>Nxtscape 0.5.0 - The Open-source Agentic Browser</h2>
+        <p>Built on Chromium with AI superpowers.</p>
         
-        <h3>Features</h3>
+        <h3>Key Features</h3>
         <ul>
-          <li>Built on latest Chromium</li>
-          <li>Enhanced privacy controls</li>
-          <li>Automatic updates via Sparkle</li>
-          <li>Optimized for macOS</li>
+          <li>🤖 <b>AI agents that run locally</b> - automate tasks without sending data to the cloud</li>
+          <li>💬 <b>Local AI chat</b> - chat with AI in the sidebar using local models</li>
+          <li>🔍 <b>Smart search</b> - instantly find anything you've seen before</li>
+          <li>🏠 <b>Chrome extension compatible</b> - works with all your existing extensions</li>
+          <li>🤝 <b>MCP tools support</b> - works with Model Context Protocol out of the box</li>
+          <li>🛡️ <b>Built-in AI ad blocker</b> - browse without ads and trackers</li>
+          <li>🔒 <b>100% private</b> - your browsing history stays on your machine</li>
+          <li>🔓 <b>Open source</b> - see exactly what's happening under the hood</li>
         </ul>
         
         <h3>System Requirements</h3>
